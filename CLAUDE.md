@@ -3,6 +3,7 @@
 Dhiren Grover's link-in-bio site. Live at https://dilgrover.github.io (GitHub Pages, `main` branch, repo root). This URL is the link in his Instagram bio, so it must never change or break.
 
 ## Rules
+- **Keep docs in sync.** Every change to the site must also update this file (Layout and Pending sections) in the same commit, and the owner's project memory note about the link hub, so the next chat starts from what is actually live.
 - Plain static HTML/CSS. No build step, no frameworks, no Jekyll (`.nojekyll` is present).
 - No Claude or claude.ai branding or links anywhere. Content made as a Claude artifact gets copied in as plain HTML, never embedded or linked.
 - Keep the visual identity: background `#0a0710`, panel `#120c1b`, Avan pink `#ff3d9a` / `#ff8cc6`, fonts Inter Tight (display/body) and JetBrains Mono (labels), loaded from Google Fonts.
