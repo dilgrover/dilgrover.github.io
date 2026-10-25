@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Desk Setup · Dhiren Grover</title>
+<meta name="description" content="Every product on my desk, with links.">
+<meta property="og:title" content="Everything on my desk">
+<meta property="og:description" content="12 products, scanned by my AI. Links to all of them.">
+<meta property="og:image" content="https://dilgrover.github.io/assets/og.jpg">
+<link rel="icon" href="../assets/avan-orb.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+body{margin:0}
+/* Layout: one narrow phone-first column styled as Avan's "scan report" from the reel: header panel, then a numbered inventory list. Single dark look on purpose, to match the reel. */
+:root{
+  --bg:#0a0710; --panel:#120c1b; --line:rgba(255,255,255,.09); --fg:#f6f1f8; --muted:rgba(246,241,248,.62);
+  --pink:#ff3d9a; --pink-soft:#ff8cc6; --glow:rgba(255,61,154,.35);
+  --display:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --body:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5;
+  background-image:radial-gradient(120% 60% at 50% -10%,rgba(255,61,154,.16),transparent 60%);
+  background-repeat:no-repeat}
+.wrap{max-width:600px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 48px;display:flex;flex-direction:column;gap:22px}
+.kick{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--pink-soft);display:flex;justify-content:space-between;gap:12px}
+.panel{background:var(--panel);border:1px solid rgba(255,61,154,.55);border-radius:22px;padding:22px 20px 18px;box-shadow:0 0 40px var(--glow)}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-spacing:-.03em;margin:12px 0 10px;text-wrap:balance}
+h1 span{color:var(--pink)}
+.lede{color:var(--muted);margin:0;max-width:46ch}
+.bar{height:4px;border-radius:3px;margin-top:18px;background:linear-gradient(90deg,var(--pink),#ffb3da);box-shadow:0 0 12px var(--pink)}
+.stats{display:flex;gap:18px;margin-top:14px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--muted)}
+.stats b{color:var(--fg);font-weight:700}
+ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+li{display:grid;grid-template-columns:38px minmax(0,1fr);gap:4px 10px;padding:16px 2px;border-bottom:1px solid var(--line)}
+li:first-child{border-top:1px solid var(--line)}
+.idx{font-family:var(--mono);font-size:13px;color:var(--pink);padding-top:4px;font-variant-numeric:tabular-nums}
+.brand{font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
+.model{font-family:var(--display);font-weight:700;font-size:21px;line-height:1.2;letter-spacing:-.01em;margin-top:2px}
+.spec{color:var(--muted);font-size:14.5px;margin-top:2px}
+.go{grid-column:2;justify-self:start;margin-top:10px;display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;color:var(--fg);text-decoration:none;padding:9px 14px;border-radius:999px;border:1px solid rgba(255,61,154,.7);background:rgba(255,61,154,.08);transition:background .15s,box-shadow .15s}
+.go:hover{background:rgba(255,61,154,.2);box-shadow:0 0 18px var(--glow)}
+.go:focus-visible{outline:2px solid var(--pink-soft);outline-offset:3px}
+.go .ar{color:var(--pink)}
+.group{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--pink-soft);margin:6px 0 -6px}
+.avan{display:flex;gap:14px;align-items:flex-start;padding:18px;border-radius:18px;background:var(--panel);border:1px solid var(--line)}
+.orb{flex:none;width:72px;height:72px;border-radius:50%;background:#0d0a18 url("../assets/avan-orb.jpg") center/cover no-repeat;border:1px solid rgba(255,61,154,.6);box-shadow:0 0 24px var(--glow)}
+.avan h2{font-family:var(--display);font-size:19px;margin:0 0 2px;font-weight:700}
+.avan p{margin:0;color:var(--muted);font-size:14.5px}
+.back{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;color:var(--pink-soft);text-decoration:none;align-self:flex-start}
+.foot{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--muted);display:flex;flex-direction:column;gap:6px;text-align:center}
+.foot a{color:var(--pink-soft);text-decoration:none}
+@media (prefers-reduced-motion:reduce){.go{transition:none}}
+</style>
+
+</head><body>
+<div class="wrap">
+  <a class="back" href="../">← All links</a>
+  <div class="panel">
+    <div class="kick"><span>AVAN · SCAN REPORT</span><span>DESK_01</span></div>
+    <h1>Everything on my <span>desk</span></h1>
+    <p class="lede">The full setup from the reel, item by item. Tap any one to find it.</p>
+    <div class="bar"></div>
+    <div class="stats"><span><b>12</b> PRODUCTS</span><span><b>1</b> AI</span><span>LONDON, UK</span></div>
+  </div>
+
+  <div class="group">DISPLAY &amp; LIGHT</div>
+  <ol>
+    <li><span class="idx">01</span><div><div class="brand">Philips</div><div class="model">49B2U6900CH</div><div class="spec">49" curved, 5120×1440, Smart KVM, webcam, 100W USB-C</div></div>
+      <a class="go" href="https://www.amazon.co.uk/dp/B0CQSQP417" target="_blank" rel="noopener">Buy on Amazon UK <span class="ar">↗</span></a></li>
+    <li><span class="idx">02</span><div><div class="brand">BenQ</div><div class="model">ScreenBar Halo 2</div><div class="spec">Clip-on monitor light bar with wireless dial controller</div></div>
+      <a class="go" href="https://www.amazon.co.uk/dp/B0DK59YKRS" target="_blank" rel="noopener">Buy on Amazon UK <span class="ar">↗</span></a></li>
+  </ol>
+
+  <div class="group">INPUT &amp; AUDIO</div>
+  <ol>
+    <li><span class="idx">03</span><div><div class="brand">Jabra</div><div class="model">Evolve2 65 MS</div><div class="spec">Teams-certified wireless headset</div></div>
+      <a class="go" href="https://www.amazon.co.uk/dp/B086KC8JX8" target="_blank" rel="noopener">Buy on Amazon UK <span class="ar">↗</span></a></li>
+    <li><span class="idx">04</span><div><div class="brand">Corsair</div><div class="model">Vanguard 96 Wireless</div><div class="spec">Mechanical keyboard</div></div>
+      <a class="go" href="https://www.amazon.co.uk/dp/B0GPR9T5ZB" target="_blank" rel="noopener">Buy on Amazon UK <span class="ar">↗</span></a></li>
+    <li><span class="idx">05</span><div><div class="brand">Logitech</div><div class="model">MX Master 4</div><div class="spec">Wireless mouse, Bolt receiver</div></div>
+      <a class="go" href="https://amzn.eu/d/0czx5HUc" target="_blank" rel="noopener">Buy on Amazon UK <span class="ar">↗</span></a></li>
+  </ol>
+
+  <div class="group">MOBILE &amp; CHARGING</div>
+  <ol>
+    <li><span class="idx">06</span><div><div class="brand">Samsung</div><div class="model">Galaxy Tab S12+</div><div class="spec">My Home Assistant control panel</div></div>
+      <a class="go" href="https://www.samsung.com/uk/tablets/galaxy-tab-s/galaxy-tab-s12-plus-grey-256gb-sm-x840nzareub/" target="_blank" rel="noopener">Buy from Samsung UK <span class="ar">↗</span></a></li>
+    <li><span class="idx">07</span><div><div class="brand">Samsung</div><div class="model">Galaxy S26 Ultra</div><div class="spec">Phone, and what I shoot every reel on</div></div>
+      <a class="go" href="https://www.samsung.com/uk/smartphones/galaxy-s26-ultra/" target="_blank" rel="noopener">Buy from Samsung UK <span class="ar">↗</span></a></li>
+    <li><span class="idx">08</span><div><div class="brand">KUXIU</div><div class="model">D5 Qi2.2 25W</div><div class="spec">3-in-1 magnetic charging station with display and cooling fan</div></div>
+      <a class="go" href="https://amzn.eu/d/03mWFggJ" target="_blank" rel="noopener">Buy on Amazon UK <span class="ar">↗</span></a></li>
+  </ol>
+
+  <div class="group">SMART HOME, UNDER THE RISER</div>
+  <ol>
+    <li><span class="idx">09</span><div><div class="brand">Home Assistant</div><div class="model">Voice PE</div><div class="spec">Local, private voice assistant</div></div>
+      <a class="go" href="https://shop.everythingsmart.io/products/home-assistant-voice-preview-edition" target="_blank" rel="noopener">Buy from Everything Smart <span class="ar">↗</span></a></li>
+    <li><span class="idx">10</span><div><div class="brand">Google</div><div class="model">Nest Mini</div><div class="spec">Smart speaker</div></div>
+      <a class="go" href="https://amzn.eu/d/04QH7xbd" target="_blank" rel="noopener">Buy on Amazon UK <span class="ar">↗</span></a></li>
+    <li><span class="idx">11</span><div><div class="brand">Everything Smart</div><div class="model">Everything Presence Lite</div><div class="spec">mmWave room presence sensor</div></div>
+      <a class="go" href="https://shop.everythingsmart.io/products/everything-presence-lite" target="_blank" rel="noopener">Buy from Everything Smart <span class="ar">↗</span></a></li>
+  </ol>
+
+  <div class="group">THE DESK</div>
+  <ol>
+    <li><span class="idx">12</span><div><div class="brand">ErGear</div><div class="model">Electric Standing Desk</div><div class="spec">120×60 cm, dual motor, 80 kg, 4 memory presets</div></div>
+      <a class="go" href="https://www.amazon.co.uk/dp/B0FQBNMZ3H" target="_blank" rel="noopener">Buy on Amazon UK <span class="ar">↗</span></a></li>
+  </ol>
+
+  <div class="avan"><div class="orb" aria-hidden="true"></div>
+    <div><h2>Avan</h2><p>My own AI assistant. It runs on the big screen and works with Home Assistant. The GitHub repo is coming soon, so you can build your own.</p>
+      <a class="go" style="margin-top:12px" href="https://www.instagram.com/dilgrover/" target="_blank" rel="noopener">Follow @dilgrover for the release <span class="ar">↗</span></a></div></div>
+
+  <div class="foot">
+    <span>Links go to the listing I bought from or the maker's own page. No affiliate links.</span>
+    <a href="https://www.instagram.com/dilgrover/" target="_blank" rel="noopener">@dilgrover</a>
+  </div>
+</div>
+</body></html>
