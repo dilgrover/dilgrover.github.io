@@ -28,3 +28,4 @@ Copy an existing `<a class="btn">` in the relevant section of `index.html`, keep
 ## Pending
 - Confirm whether @travelseri is Instagram (currently linked as Instagram).
 - When the `avan` repo goes public, replace the COMING SOON card with a real "Avan on GitHub" link.
+- Analytics: none yet (owner deferred it). Preferred option when wanted: GoatCounter (cookieless, code `dilgrover`), owner signs up, then add the script plus click events on buttons and downloads.
