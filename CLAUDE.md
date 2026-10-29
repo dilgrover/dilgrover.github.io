@@ -12,9 +12,10 @@ Dhiren Grover's link-in-bio site. Live at https://dilgrover.github.io (GitHub Pa
 
 ## Layout
 - `index.html`: home page. Sections, top to bottom: header, **RESOURCES · FREE** (resource cards, newest first), FOLLOW · MAIN, TRAVEL, GAMING, MY PODCAST · SOCIAL UNTOLD, COMING SOON.
+- `switzerland/index.html`: "Our Swiss Shortlist" travel guide (12 spots by region, DDLJ filming trail, driving tips, suggested order). This is the page the "SWISS" comment keyword sends people to. Newest resource card on the home page.
 - `desk/index.html`: desk setup gear list (12 products).
 - `downloads/`: files people can download (PDFs, images, route lists).
-- `assets/`: images (`desk-banner.jpg`, `avan-orb.jpg` also used as favicon, `og.jpg` link preview).
+- `assets/`: images (`desk-banner.jpg`, `swiss-banner.jpg` (card banner and the Swiss page's link preview), `swiss-matterhorn.jpg` (Swiss page hero), `avan-orb.jpg` also used as favicon, `og.jpg` link preview).
 
 ## Adding a new resource (page or download)
 1. Create a folder named after it, e.g. `swiss-route/index.html`. Copy `desk/index.html` as the template (keep the `← All links` back link, the head meta and the styles).
@@ -26,6 +27,7 @@ Dhiren Grover's link-in-bio site. Live at https://dilgrover.github.io (GitHub Pa
 Copy an existing `<a class="btn">` in the relevant section of `index.html`, keeping the "Name / @handle · short description" pattern.
 
 ## Pending
+- Swiss guide: add the mountain pass road and the sunset lake from the Switzerland reel once the owner names them.
 - Confirm whether @travelseri is Instagram (currently linked as Instagram).
 - When the `avan` repo goes public, replace the COMING SOON card with a real "Avan on GitHub" link.
 - Analytics: none yet (owner deferred it). Preferred option when wanted: GoatCounter (cookieless, code `dilgrover`), owner signs up, then add the script plus click events on buttons and downloads.

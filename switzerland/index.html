@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Our Swiss Shortlist · Dhiren Grover</title>
+<meta name="description" content="Our favourite places in Switzerland by region, plus the DDLJ filming trail, with how to reach each one.">
+<meta property="og:title" content="Our Swiss Shortlist">
+<meta property="og:description" content="Zermatt, Jungfraujoch, Lucerne, Titlis and the DDLJ trail. How to get to each one, with our tips.">
+<meta property="og:image" content="https://dilgrover.github.io/assets/swiss-banner.jpg">
+<link rel="icon" href="../assets/avan-orb.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+body{margin:0}
+/* Layout: one phone-first column in the hub's dark + Avan-pink identity. Stops grouped by region, each with a "getting there" plate; the DDLJ trail is a scene list. */
+:root{
+  --bg:#0a0710; --panel:#120c1b; --line:rgba(255,255,255,.09); --fg:#f6f1f8; --muted:rgba(246,241,248,.62);
+  --pink:#ff3d9a; --pink-soft:#ff8cc6; --glow:rgba(255,61,154,.35); --sign:#f2c400; --sign-ink:#1a1a1a;
+  --display:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--display);font-size:16px;line-height:1.55;
+  background-image:radial-gradient(120% 60% at 50% -10%,rgba(255,61,154,.16),transparent 60%);background-repeat:no-repeat}
+.wrap{max-width:600px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:calc(28px + env(safe-area-inset-top,0px)) calc(48px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:16px}
+.back{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;color:var(--pink-soft);text-decoration:none;align-self:flex-start}
+.hero{position:relative;margin:0;border-radius:22px;overflow:hidden;border:1px solid rgba(255,61,154,.55);box-shadow:0 0 40px var(--glow);background:var(--panel)}
+.hero img{display:block;width:100%;aspect-ratio:4/5;max-height:560px;object-fit:cover;object-position:top}
+.hero figcaption{position:absolute;inset:auto 0 0 0;padding:70px 20px 18px;background:linear-gradient(to top,rgba(10,7,16,.92),rgba(10,7,16,0))}
+.kick{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--pink-soft)}
+h1{font-weight:800;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-spacing:-.03em;margin:8px 0 0;text-wrap:balance}
+h1 span{color:var(--pink)}
+.lede{color:var(--muted);margin:0}
+.lede b{color:var(--fg);font-weight:700}
+.jump{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.jump a{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-decoration:none;color:var(--fg);padding:7px 12px;border-radius:999px;border:1px solid rgba(255,61,154,.6);background:rgba(255,61,154,.08)}
+.jump a:hover{box-shadow:0 0 16px var(--glow)}
+a:focus-visible{outline:2px solid var(--pink-soft);outline-offset:3px}
+.group{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--pink-soft);margin:22px 0 0;scroll-margin-top:16px}
+.gintro{color:var(--muted);font-size:14.5px;margin:-8px 0 0}
+.stop{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.meta .reg{color:var(--pink-soft)}
+.meta .alt{font-variant-numeric:tabular-nums}
+.inreel{color:#fff;background:var(--pink);border-radius:6px;padding:2px 7px;letter-spacing:.14em}
+h2{margin:0;font-weight:700;font-size:21px;line-height:1.2;letter-spacing:-.01em;text-wrap:balance}
+.stop p{margin:0;color:var(--muted);font-size:15px}
+.sign{display:flex;align-items:stretch;background:var(--sign);color:var(--sign-ink);border-radius:6px;font-size:14px;line-height:1.45;overflow:hidden}
+.sign .ar{display:flex;align-items:center;padding:0 10px;background:rgba(0,0,0,.1);font-weight:800}
+.sign .tx{padding:8px 12px;min-width:0}
+.sign b{font-weight:800}
+.tip{font-size:14.5px;color:var(--fg)!important;border-left:3px solid var(--pink);padding:1px 0 1px 12px}
+.tip b{color:var(--pink-soft)}
+.film{background:var(--panel);border:1px solid rgba(255,61,154,.45);border-radius:18px;padding:4px 18px}
+.scene{padding:13px 0;border-bottom:1px dashed var(--line);display:flex;flex-direction:column;gap:2px}
+.scene:last-child{border-bottom:0}
+.scene .w{font-weight:700}
+.scene .w span{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--muted);margin-left:8px;text-transform:uppercase}
+.scene .s{color:var(--muted);font-size:14.5px}
+.scene .s em{font-style:normal;color:var(--pink-soft)}
+.basics{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px}
+.basic{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px}
+.basic h3{margin:0 0 4px;font-size:16px;font-weight:700}
+.basic p{margin:0;color:var(--muted);font-size:14.5px}
+.route{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px 18px}
+.route ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
+.route li::marker{color:var(--pink);font-family:var(--mono);font-size:13px}
+.note{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--muted);margin:10px 0 0}
+.foot{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--muted);display:flex;flex-direction:column;gap:6px;text-align:center;margin-top:14px}
+.foot a{color:var(--pink-soft);text-decoration:none}
+</style>
+</head><body>
+<div class="wrap">
+  <a class="back" href="../">← All links</a>
+
+  <figure class="hero">
+    <img src="../assets/swiss-matterhorn.jpg" alt="The Matterhorn above Riffelsee lake, with clouds wrapped around the peak">
+    <figcaption><div class="kick">SWITZERLAND · ALPINE 26</div><h1>Our Swiss <span>Shortlist</span></h1></figcaption>
+  </figure>
+
+  <p class="lede">Four summers in Switzerland, a different region every time. These are our favourite places, with how to reach each one and what we'd tell a friend. Spots tagged <b>In the reel</b> are the ones you just watched. <b>Save this page</b> for your trip.</p>
+
+  <ul class="jump">
+    <li><a href="#jungfrau">Jungfrau region</a></li>
+    <li><a href="#central">Lucerne &amp; Titlis</a></li>
+    <li><a href="#zermatt">Zermatt</a></li>
+    <li><a href="#engadin">St. Moritz</a></li>
+    <li><a href="#ddlj">DDLJ trail</a></li>
+    <li><a href="#driving">Driving tips</a></li>
+  </ul>
+
+  <div class="group" id="jungfrau">JUNGFRAU REGION · BERNESE OBERLAND</div>
+  <p class="gintro">The classic Swiss postcard. Base yourself in Interlaken and do everything here as day trips.</p>
+
+  <section class="stop">
+    <div class="meta"><span class="reg">Interlaken</span><span class="alt">566 m</span><span class="inreel">In the reel</span></div>
+    <h2>Interlaken</h2>
+    <p>The town between two lakes. The big meadow in the middle, the Höhematte, is where paragliders land with the Jungfrau behind them.</p>
+    <div class="sign"><span class="ar">→</span><span class="tx"><b>Getting there:</b> on the A8 between Lake Thun and Lake Brienz. Most of the region is under an hour away.</span></div>
+    <p class="tip"><b>Our tip:</b> stay here and do day trips. It's easier than changing hotels every night.</p>
+  </section>
+
+  <section class="stop">
+    <div class="meta"><span class="reg">Lauterbrunnen &amp; Wengen</span><span class="alt">795 m</span><span class="inreel">In the reel</span></div>
+    <h2>Lauterbrunnen valley</h2>
+    <p>Sheer cliffs on both sides, waterfalls everywhere, and Staubbach Falls dropping almost 300 m right beside the village.</p>
+    <div class="sign"><span class="ar">→</span><span class="tx"><b>Getting there:</b> about 20 minutes' drive from Interlaken. Park by Lauterbrunnen station.</span></div>
+    <p class="tip"><b>Our tip:</b> take the cog railway up to car-free Wengen. You get the whole valley from above, and that's where our train shots came from.</p>
+  </section>
+
+  <section class="stop">
+    <div class="meta"><span class="reg">Grindelwald</span><span class="alt">1,034 m</span></div>
+    <h2>Grindelwald and First</h2>
+    <p>A mountain village right under the north face of the Eiger. Take the gondola up to First for the Cliff Walk and the short hike to Bachalpsee lake.</p>
+    <div class="sign"><span class="ar">→</span><span class="tx"><b>Getting there:</b> about 30 minutes' drive from Interlaken. The First gondola leaves from the village centre.</span></div>
+    <p class="tip"><b>Our tip:</b> the walk to Bachalpsee is about an hour each way and mostly gentle. On a still day the peaks reflect in the lake.</p>
+  </section>
+
+  <section class="stop">
+    <div class="meta"><span class="reg">Jungfraujoch</span><span class="alt">3,454 m</span></div>
+    <h2>Jungfraujoch, Top of Europe</h2>
+    <p>Europe's highest railway station, inside the mountain. Snow all year, the Ice Palace, the Sphinx viewing terrace and the Aletsch Glacier stretching away below you.</p>
+    <div class="sign"><span class="ar">→</span><span class="tx"><b>Getting there:</b> Eiger Express gondola from Grindelwald Terminal to Eigergletscher, then the Jungfrau Railway through the Eiger to the top. You can also go up via Lauterbrunnen, Wengen and Kleine Scheidegg.</span></div>
+    <p class="tip"><b>Our tip:</b> check the summit webcam before you buy tickets. If the top is in cloud you'll see nothing. Take it slow up there, because the air is thin at almost 3,500 m.</p>
+  </section>
+
+  <section class="stop">
+    <div class="meta"><span class="reg">Lake Brienz</span><span class="alt">564 m lake level</span><span class="inreel">In the reel</span></div>
+    <h2>Giessbach Falls</h2>
+    <p>A waterfall that tumbles in stages straight down into the turquoise water of Lake Brienz, with a grand old hotel beside it.</p>
+    <div class="sign"><span class="ar">→</span><span class="tx"><b>Getting there:</b> by boat from Brienz or Interlaken Ost to the Giessbach landing, then the historic funicular up. You can also drive.</span></div>
+    <p class="tip"><b>Our tip:</b> the lake's colour is the real show, and it looks best from the water. Take the boat at least one way.</p>
+  </section>
+
+  <section class="stop">
+    <div class="meta"><span class="reg">Brienz</span><span class="alt">2,244 m top station</span><span class="inreel">In the reel</span></div>
+    <h2>Brienz Rothorn steam railway</h2>
+    <p>The red carriages and the steam in our reel. A steam cog railway climbs from Brienz to near the summit, with Lake Brienz below you the whole way.</p>
+    <div class="sign"><span class="ar">→</span><span class="tx"><b>Getting there:</b> the valley station is in Brienz, opposite the lake boats and the train station. Summer only, roughly June to October.</span></div>
+    <p class="tip"><b>Our tip:</b> sit on the side facing the lake, and book ahead in high summer.</p>
+  </section>
+
+  <div class="group" id="central">CENTRAL SWITZERLAND</div>
+  <p class="gintro">About an hour from Interlaken. Easy to add on the way in from Zurich.</p>
+
+  <section class="stop">
+    <div class="meta"><span class="reg">Lucerne</span><span class="alt">435 m</span></div>
+    <h2>Lucerne</h2>
+    <p>A lakeside old town with the wooden Chapel Bridge, painted houses, the Lion Monument and mountains rising straight out of the lake.</p>
+    <div class="sign"><span class="ar">→</span><span class="tx"><b>Getting there:</b> about an hour from Zurich or Interlaken by car or train. Park once and walk; the old town is compact.</span></div>
+    <p class="tip"><b>Our tip:</b> walk the Chapel Bridge early before the tour groups, then take a boat out on the lake. Mount Pilatus and Rigi are both day trips from here.</p>
+  </section>
+
+  <section class="stop">
+    <div class="meta"><span class="reg">Engelberg</span><span class="alt">3,020 m summit station</span></div>
+    <h2>Mount Titlis</h2>
+    <p>Glacier and snow all year. Ride the Rotair, the revolving cable car, then walk the Titlis Cliff Walk suspension bridge and the blue Glacier Cave. There's a Shah Rukh Khan and Kajol cutout up there for your DDLJ photo.</p>
+    <div class="sign"><span class="ar">→</span><span class="tx"><b>Getting there:</b> about 40 minutes' drive from Lucerne to Engelberg, then cable cars via Trübsee lake to the top.</span></div>
+    <p class="tip"><b>Our tip:</b> stop at Trübsee on the way down. It's a lovely lake walk and far quieter than the summit.</p>
+  </section>
+
+  <div class="group" id="zermatt">ZERMATT · VALAIS</div>
+  <p class="gintro">The Matterhorn. Worth the extra drive south.</p>
+
+  <section class="stop">
+    <div class="meta"><span class="reg">Zermatt</span><span class="alt">2,757 m</span><span class="inreel">In the reel</span></div>
+    <h2>Riffelsee and the Matterhorn</h2>
+    <p>The lake from our opening shot. On a calm morning the Matterhorn reflects in the water. It's the classic Swiss view for a reason.</p>
+    <div class="sign"><span class="ar">→</span><span class="tx"><b>Getting there:</b> Gornergrat railway from Zermatt to <b>Rotenboden</b>, then a short walk down to the lake.</span></div>
+    <p class="tip"><b>Our tip:</b> get the earliest train you can. The water is stillest in the morning, and by midday the peak often disappears into cloud.</p>
+  </section>
+
+  <section class="stop">
+    <div class="meta"><span class="reg">Zermatt</span><span class="alt">1,608 m</span><span class="inreel">In the reel</span></div>
+    <h2>Zermatt village</h2>
+    <p>A car-free mountain village with electric taxis, wooden chalets and the Matterhorn at the end of the street.</p>
+    <div class="sign"><span class="ar">→</span><span class="tx"><b>Getting there:</b> drive to Täsch, park at the Matterhorn Terminal and take the shuttle train (about 12 minutes).</span></div>
+    <p class="tip"><b>Our tip:</b> walk to the Kirchbrücke bridge over the river for the best free Matterhorn view in town.</p>
+  </section>
+
+  <div class="group" id="engadin">ENGADIN · GRAUBÜNDEN</div>
+  <p class="gintro">A quieter, sunnier side of Switzerland in the far east.</p>
+
+  <section class="stop">
+    <div class="meta"><span class="reg">St. Moritz</span><span class="alt">1,822 m</span></div>
+    <h2>St. Moritz</h2>
+    <p>Lakes, mountains and long sunny days. A good base for the Bernina Pass and Diavolezza.</p>
+    <div class="sign"><span class="ar">→</span><span class="tx"><b>Getting there:</b> by car over the Julier Pass, or on the Bernina or Glacier Express trains.</span></div>
+  </section>
+
+  <section class="stop">
+    <div class="meta"><span class="reg">Bernina Pass</span><span class="alt">2,973 m</span></div>
+    <h2>Diavolezza</h2>
+    <p>A cable car takes you right up to glacier views of Piz Palü and the Bernina range. Our favourite high-altitude stop that hardly anyone talks about.</p>
+    <div class="sign"><span class="ar">→</span><span class="tx"><b>Getting there:</b> the valley station is on the Bernina Pass road, about 25 minutes' drive from St. Moritz.</span></div>
+    <p class="tip"><b>Our tip:</b> take a jacket even in July. It's cold at nearly 3,000 m.</p>
+  </section>
+
+  <div class="group" id="ddlj">THE DDLJ TRAIL · SENORITA, BADE BADE DESHON MEIN…</div>
+  <p class="gintro">Most of Raj and Simran's Switzerland was shot around Gstaad and Saanen, about 1 hour 15 minutes from Interlaken. Easy in one day by car or on the GoldenPass trains.</p>
+  <div class="film">
+    <div class="scene"><div class="w">Saanen bridge <span>Saanen</span></div><div class="s">Where Raj tells Simran he loves her, and where they dance later. <em>There's a DDLJ poster on the bridge.</em></div></div>
+    <div class="scene"><div class="w">Saanen train station <span>Saanen</span></div><div class="s">The postcard scene and Simran boarding the train. <em>A short walk from the bridge.</em></div></div>
+    <div class="scene"><div class="w">Saanen church <span>Saanen</span></div><div class="s">The old church Simran wants to visit, in the middle of the village.</div></div>
+    <div class="scene"><div class="w">Gstaad train station <span>Gstaad</span></div><div class="s">Simran jumps onto the old red train and Raj runs after her. <em>About 10 minutes from Saanen by train.</em></div></div>
+    <div class="scene"><div class="w">Gstaad Promenade <span>Gstaad</span></div><div class="s">The car-free main street, with the horse-and-carriage ride and the bakery chocolate scene.</div></div>
+    <div class="scene"><div class="w">Zweisimmen station <span>Zweisimmen</span></div><div class="s">The kiosk where Simran buys the cowbell and misses her train. <em>The GoldenPass trains stop here.</em></div></div>
+    <div class="scene"><div class="w">Höheweg fountain <span>Interlaken</span></div><div class="s">Raj's water-spraying plastic rose. <em>Near where the paragliders land, so it fits into your Interlaken day.</em></div></div>
+    <div class="scene"><div class="w">Mount Titlis <span>Engelberg</span></div><div class="s">Not a confirmed filming spot, but the Shah Rukh and Kajol cutout up top is a must for the photo.</div></div>
+  </div>
+
+  <div class="group" id="driving">IF YOU'RE DRIVING</div>
+  <div class="basics">
+    <div class="basic"><h3>Get the vignette</h3><p>Swiss motorways need a yearly e-vignette. Buy it online before you cross the border.</p></div>
+    <div class="basic"><h3>Car-free villages</h3><p>Zermatt, Wengen and Mürren don't allow normal cars. Park in the valley and take the train in.</p></div>
+    <div class="basic"><h3>Passes are seasonal</h3><p>High mountain passes usually open from around June to October. Check they're open before you plan a route over one.</p></div>
+    <div class="basic"><h3>Mix car and train</h3><p>Drive between regions, then use cog railways and cable cars for the views. Some of the best spots have no road at all.</p></div>
+  </div>
+
+  <div class="group">A SIMPLE ORDER TO FOLLOW</div>
+  <div class="route">
+    <ol>
+      <li><b>Lucerne</b> and <b>Mount Titlis</b> (2 days)</li>
+      <li><b>Interlaken</b> as your base: Lauterbrunnen, Grindelwald, Jungfraujoch, Brienz and Giessbach (3–4 days)</li>
+      <li><b>DDLJ day</b>: Saanen, Gstaad and Zweisimmen (1 day)</li>
+      <li><b>Zermatt</b>: Riffelsee and the Matterhorn (2 days)</li>
+      <li><b>St. Moritz</b> and <b>Diavolezza</b> if you have more time (2 days)</li>
+    </ol>
+    <p class="note">Opening times, seasons and prices change, so check each railway's own website before you go.</p>
+  </div>
+
+  <div class="foot">
+    <span>More of the Alps, and the full Alpine 26 road trip, on our Instagram.</span>
+    <a href="https://www.instagram.com/dilgrover/" target="_blank" rel="noopener">@dilgrover</a>
+    <a href="https://www.instagram.com/meeeluv/" target="_blank" rel="noopener">@meeeluv</a>
+  </div>
+</div>
+</body></html>
