@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Build Your Own Jarvis · Dhiren Grover</title>
+<meta name="description" content="How I built Avan, my own AI assistant at home: what it does, what you need, what it costs, and the steps to build yours. Part 1 of 4.">
+<meta property="og:title" content="Build your own Jarvis: the Avan guide">
+<meta property="og:description" content="What you need, what it costs and the steps to build your own AI assistant at home. Part 1 of 4.">
+<meta property="og:image" content="https://dilgrover.github.io/assets/avan-og.jpg">
+<link rel="icon" href="../assets/avan-orb.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+body{margin:0}
+/* Layout: one phone-first column in the hub's dark + Avan-pink identity. Sections: what it does, what you need, costs, how it fits, the build steps, the rules, a starter prompt, what's next. */
+:root{
+  --bg:#0a0710; --panel:#120c1b; --line:rgba(255,255,255,.09); --fg:#f6f1f8; --muted:rgba(246,241,248,.66);
+  --pink:#ff3d9a; --pink-soft:#ff8cc6; --glow:rgba(255,61,154,.35);
+  --display:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--display);font-size:16px;line-height:1.55;
+  background-image:radial-gradient(120% 60% at 50% -10%,rgba(255,61,154,.16),transparent 60%);background-repeat:no-repeat}
+.wrap{max-width:640px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:calc(28px + env(safe-area-inset-top,0px)) calc(48px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:16px}
+.back{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;color:var(--pink-soft);text-decoration:none;align-self:flex-start}
+.hero{position:relative;margin:0;border-radius:22px;overflow:hidden;border:1px solid rgba(255,61,154,.55);box-shadow:0 0 40px var(--glow);background:var(--panel)}
+.hero img{display:block;width:100%;aspect-ratio:4/5;max-height:520px;object-fit:cover;object-position:center 40%}
+.hero figcaption{position:absolute;inset:auto 0 0 0;padding:80px 20px 18px;background:linear-gradient(to top,rgba(10,7,16,.95),rgba(10,7,16,0))}
+.kick{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--pink-soft)}
+h1{font-weight:800;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-spacing:-.03em;margin:8px 0 0;text-wrap:balance}
+h1 span{color:var(--pink)}
+.lede{color:var(--muted);margin:0}
+.lede b{color:var(--fg);font-weight:700}
+.jump{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.jump a{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-decoration:none;color:var(--fg);padding:7px 12px;border-radius:999px;border:1px solid rgba(255,61,154,.6);background:rgba(255,61,154,.08)}
+.jump a:hover{box-shadow:0 0 16px var(--glow)}
+a:focus-visible{outline:2px solid var(--pink-soft);outline-offset:3px}
+.group{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--pink-soft);margin:24px 0 0;scroll-margin-top:16px}
+.gintro{color:var(--muted);font-size:15px;margin:-8px 0 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.card p b{color:var(--fg)}
+h2{margin:0;font-weight:700;font-size:21px;line-height:1.2;letter-spacing:-.01em;text-wrap:balance}
+.feat{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.f{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px}
+.f b{display:block;font-size:15.5px;margin-bottom:3px}
+.f span{color:var(--muted);font-size:14px;line-height:1.4;display:block}
+@media (max-width:420px){.feat{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--pink-soft);font-weight:500;text-transform:uppercase}
+td.c{white-space:nowrap;font-variant-numeric:tabular-nums}
+td small{display:block;color:var(--muted);font-size:13px}
+.tablebox{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:6px 10px;overflow-x:auto}
+.flow{display:flex;flex-direction:column;gap:8px;align-items:stretch}
+.node{border:1px solid rgba(255,61,154,.5);background:rgba(255,61,154,.06);border-radius:14px;padding:10px 14px}
+.node b{display:block}
+.node span{color:var(--muted);font-size:14px}
+.node.core{border-color:var(--pink);box-shadow:0 0 22px var(--glow);background:rgba(255,61,154,.12)}
+.arrow{text-align:center;color:var(--pink-soft);font-family:var(--mono);font-size:13px;line-height:1}
+.row3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+@media (max-width:420px){.row3{grid-template-columns:1fr}}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.step .n{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;color:var(--pink-soft)}
+.step p{margin:0;color:var(--muted);font-size:15px}
+.step p b{color:var(--fg)}
+.step ul{margin:0;padding-left:20px;color:var(--muted);font-size:15px}
+.step li{margin:3px 0}
+.step li b{color:var(--fg)}
+pre{margin:0;background:#07050b;border:1px solid var(--line);border-radius:12px;padding:14px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.55;color:#f3e9f7}
+code{font-family:var(--mono);font-size:.9em;color:var(--pink-soft)}
+pre code{color:inherit;font-size:inherit}
+.tip{font-size:14.5px;color:var(--fg)!important;border-left:3px solid var(--pink);padding:1px 0 1px 12px}
+.tip b{color:var(--pink-soft)}
+.prompt{position:relative}
+.copy{align-self:flex-start;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:#fff;background:var(--pink);border:0;border-radius:999px;padding:9px 16px;cursor:pointer;min-height:40px}
+.copy:hover{box-shadow:0 0 16px var(--glow)}
+.next{display:grid;gap:10px}
+.next .f{display:flex;gap:12px;align-items:flex-start}
+.next .num{font-family:var(--mono);font-size:12px;color:#fff;background:var(--pink);border-radius:8px;padding:3px 8px;flex:none}
+.foot{color:var(--muted);font-size:13.5px;text-align:center;margin-top:18px}
+.foot a{color:var(--pink-soft)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../">← All links</a>
+
+<figure class="hero">
+  <img src="../assets/avan-banner.jpg" alt="Avan's glowing purple orb on its command centre, standing by" width="1080" height="1350">
+  <figcaption>
+    <div class="kick">FREE GUIDE · PART 1 OF 4</div>
+    <h1>Build your own <span>Jarvis</span></h1>
+  </figcaption>
+</figure>
+
+<p class="lede">This is how I built <b>Avan</b>, my own AI assistant that runs at home. I'm not a full-time developer: I described what I wanted and an AI coding agent wrote the code, one small change at a time. This guide gives you <b>what you need, what it really costs, how the pieces fit, and the exact steps</b>, so you can build yours.</p>
+
+<ul class="jump">
+  <li><a href="#does">What it does</a></li>
+  <li><a href="#need">What you need</a></li>
+  <li><a href="#cost">Costs</a></li>
+  <li><a href="#how">How it fits</a></li>
+  <li><a href="#steps">The steps</a></li>
+  <li><a href="#rules">Safety rules</a></li>
+  <li><a href="#prompt">Starter prompt</a></li>
+</ul>
+
+<h3 class="group" id="does">WHAT AVAN DOES</h3>
+<p class="gintro">All of this runs on a small computer at home, and I reach it by voice, Telegram or a web page.</p>
+<div class="feat">
+  <div class="f"><b>Talks and listens</b><span>English, Hindi or Hinglish, by voice or text. Same memory either way.</span></div>
+  <div class="f"><b>Runs the house</b><span>Lights, scenes, music and the TV through Home Assistant.</span></div>
+  <div class="f"><b>Remembers</b><span>Facts, preferences and unfinished things, in a memory I can see and edit.</span></div>
+  <div class="f"><b>Checks on things</b><span>A morning brief, and a check every 30 minutes for doors, leaks or the internet going down. Silent unless it matters.</span></div>
+  <div class="f"><b>Knows my day</b><span>Reads my calendar and email (read-only), the car's charge, my investments.</span></div>
+  <div class="f"><b>Asks first</b><span>Nothing big (locks, alarm, spending, sending) happens without my yes on my phone.</span></div>
+  <div class="f"><b>Hand gestures</b><span>An open palm stops it mid-sentence; two hands zoom its memory map.</span></div>
+  <div class="f"><b>Builds itself</b><span>I ask for a feature, it plans it, I approve, it builds and tests it.</span></div>
+</div>
+
+<h3 class="group" id="need">WHAT YOU NEED</h3>
+<div class="card">
+  <h2>One always-on computer</h2>
+  <p>Any old PC or mini PC that can stay on works. Mine is a second-hand office PC: Windows runs a small <b>Linux virtual machine (Ubuntu, 8 GB of memory)</b> for Avan, and Home Assistant in another one beside it. You don't need a graphics card: the AI runs in the cloud.</p>
+</div>
+<div class="card">
+  <h2>A few accounts</h2>
+  <p><b>An AI model with an API</b> (I use Anthropic's Claude) is the brain. <b>Telegram</b> (free) is the chat app and where it asks for approvals. For voice: <b>Deepgram</b> to hear you and <b>Cartesia</b> to speak. <b>Home Assistant</b> if you want it to control your home (free to run yourself).</p>
+</div>
+<div class="card">
+  <h2>An AI coding agent</h2>
+  <p>This is what makes it possible without being a developer. You describe a feature in plain words, it writes the code and the tests, you check and approve. I build Avan in small steps this way: one feature, one change, tested, then the next.</p>
+  <p class="tip"><b>Skill you do need:</b> being clear about what you want, and patience to test each step.</p>
+</div>
+
+<h3 class="group" id="cost">WHAT IT COSTS ME EACH MONTH</h3>
+<p class="gintro">Real numbers from my setup, so you can plan. You can start much smaller.</p>
+<div class="tablebox">
+<table>
+  <thead><tr><th>Item</th><th>Cost</th></tr></thead>
+  <tbody>
+    <tr><td>AI model (the brain)<small>Pay per use. Day-to-day chat and checks are cheap; heavy tool use costs more.</small></td><td class="c">A few $ a month and up</td></tr>
+    <tr><td>Voice: speaking (Cartesia)<small>Starter plan, plenty for daily use</small></td><td class="c">$5 / month</td></tr>
+    <tr><td>Voice: hearing (Deepgram)<small>Pay as you go; new accounts get free credit</small></td><td class="c">Free credit, then pennies</td></tr>
+    <tr><td>Telegram<small>Chat and approvals</small></td><td class="c">Free</td></tr>
+    <tr><td>Home Assistant<small>Free to run yourself; their cloud for remote access is optional</small></td><td class="c">Free (cloud optional)</td></tr>
+    <tr><td>A domain name<small>Optional, only to reach it from outside home</small></td><td class="c">About $10 / year</td></tr>
+    <tr><td>The computer<small>One you already have, or a used mini PC</small></td><td class="c">£0 – £150 once</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="tip"><b>My tip:</b> set a monthly spending limit on every account on day one, and have your assistant tell you what it's costing you.</p>
+
+<h3 class="group" id="how">HOW THE PIECES FIT</h3>
+<div class="card">
+  <div class="flow">
+    <div class="row3">
+      <div class="node"><b>Voice</b><span>hold a key and talk</span></div>
+      <div class="node"><b>Telegram</b><span>text, from anywhere</span></div>
+      <div class="node"><b>Web panel</b><span>phone or laptop</span></div>
+    </div>
+    <div class="arrow">↓ ↓ ↓</div>
+    <div class="node core"><b>The core (your home computer)</b><span>Sends your message, its memory and its list of tools to the AI model. The model either answers, or asks to use a tool. The core runs the tool, sends back the result, and repeats until there's an answer.</span></div>
+    <div class="arrow">↓</div>
+    <div class="row3">
+      <div class="node"><b>Tools</b><span>time, web search, calendar, Home Assistant…</span></div>
+      <div class="node"><b>Memory</b><span>a small database you can read</span></div>
+      <div class="node"><b>Approvals</b><span>big actions wait for your yes</span></div>
+    </div>
+  </div>
+  <p>That loop is the whole trick. Every new skill is just one more <b>tool</b>: a name, a description the model reads, and a small function that does the work.</p>
+</div>
+
+<h3 class="group" id="steps">THE STEPS (BUILD IN THIS ORDER)</h3>
+<p class="gintro">Each step works on its own before you start the next. Don't build everything at once.</p>
+
+<div class="step">
+  <div class="n">STEP 1 · THE MACHINE</div>
+  <h2>Set up a small Linux machine</h2>
+  <p>On your always-on computer, create an Ubuntu virtual machine (or use a spare PC or mini PC directly). Give it 4–8 GB of memory. Install Python with <code>uv</code>, and put your keys in a <code>.env</code> file that never goes into git.</p>
+</div>
+
+<div class="step">
+  <div class="n">STEP 2 · THE BRAIN</div>
+  <h2>A chat in the terminal, with one tool</h2>
+  <p>This is the core loop in about 20 lines of Python. Get this working first: ask it the time and watch it call the tool.</p>
+<pre><code>import datetime, anthropic
+
+client = anthropic.Anthropic()   # reads ANTHROPIC_API_KEY
+tools = [{"name": "get_time",
+          "description": "The current local date and time.",
+          "input_schema": {"type": "object", "properties": {}}}]
+
+def run_tool(name, args):
+    if name == "get_time":
+        return datetime.datetime.now().strftime("%A %d %B, %H:%M")
+
+messages = []
+while True:
+    messages.append({"role": "user", "content": input("you> ")})
+    while True:
+        r = client.messages.create(
+            model="claude-sonnet-5", max_tokens=1024,
+            system="You are Avan, a calm, helpful home assistant.",
+            tools=tools, messages=messages)
+        messages.append({"role": "assistant", "content": r.content})
+        if r.stop_reason != "tool_use":
+            print("avan>", "".join(b.text for b in r.content if b.type == "text"))
+            break
+        messages.append({"role": "user", "content": [
+            {"type": "tool_result", "tool_use_id": b.id,
+             "content": run_tool(b.name, b.input)}
+            for b in r.content if b.type == "tool_use"]})</code></pre>
+</div>
+
+<div class="step">
+  <div class="n">STEP 3 · TOOLS</div>
+  <h2>Give it hands</h2>
+  <ul>
+    <li><b>Web search</b>, so it can answer about today.</li>
+    <li><b>Home Assistant</b>: one tool that reads a device's state and one that calls a service (<code>light.turn_on</code>, <code>scene.turn_on</code>), using a long-lived access token.</li>
+    <li><b>Calendar and email, read-only first.</b> Add writing much later, behind approvals.</li>
+  </ul>
+  <p class="tip"><b>Make each tool declare its effect:</b> <i>read</i> (safe), <i>minor</i> (a light), or <i>consequential</i> (a lock, money, a message to someone). Step 6 uses this.</p>
+</div>
+
+<div class="step">
+  <div class="n">STEP 4 · TELEGRAM</div>
+  <h2>Talk to it from your phone</h2>
+  <p>Create a bot with Telegram's <b>@BotFather</b>, and have the core answer messages <b>only from your own chat ID</b>. Now you have your assistant everywhere, and a place for it to ask you things.</p>
+</div>
+
+<div class="step">
+  <div class="n">STEP 5 · MEMORY</div>
+  <h2>Make it remember</h2>
+  <p>A small SQLite table with three kinds of memory: <b>facts</b> ("car service on the 10th"), <b>preferences</b> ("temperatures in Celsius") and <b>threads</b> (things to follow up). After each reply, a quick second call decides if anything is worth saving. Only bring the few relevant memories into each conversation, and never store passwords or card numbers.</p>
+</div>
+
+<div class="step">
+  <div class="n">STEP 6 · APPROVALS</div>
+  <h2>Nothing big without your yes</h2>
+  <p>When the model asks for a <i>consequential</i> tool, the core doesn't run it. It sends you a Telegram message with <b>Approve</b> and <b>Decline</b> buttons and waits. Enforce this in code, not in the prompt: the model can be talked into things, your code can't.</p>
+</div>
+
+<div class="step">
+  <div class="n">STEP 7 · VOICE</div>
+  <h2>Push to talk</h2>
+  <p>A tiny client on your laptop records while you hold a key and sends the audio to the core. The core turns speech into text (<b>Deepgram</b>, which handles mixed English and Hindi), runs the same loop, and speaks the reply sentence by sentence (<b>Cartesia</b>), so it starts talking in well under a second. Keep a free local voice as a backup.</p>
+  <p class="tip"><b>Name trouble?</b> If the voice says your assistant's name wrong, spell it the way it sounds in what you send to the voice. Mine says "Avan" right when I write "Evan".</p>
+</div>
+
+<div class="step">
+  <div class="n">STEP 8 · CHECKS</div>
+  <h2>Let it look after things</h2>
+  <p>Run checks on a schedule: a <b>morning brief</b> at 07:45 that only speaks if today is unusual, and a <b>home check</b> every 30 minutes (doors, leaks, the internet). Add <b>quiet hours</b>, never report the same thing twice in 12 hours, and cap notices per day. Checks can look, never change anything.</p>
+</div>
+
+<div class="step">
+  <div class="n">STEP 9 · THE PANEL</div>
+  <h2>Give it a face</h2>
+  <p>A small web app on the same machine: chat, settings, memory and a live status page. Keep it on your home network, or put it behind a login and device certificates if you open it to the internet. This is where the glowing orb in my reel lives.</p>
+</div>
+
+<h3 class="group" id="rules">MY SAFETY RULES</h3>
+<div class="card">
+  <p><b>1. Keys stay secret.</b> In a <code>.env</code> file on the machine, never in code, chats or screenshots.</p>
+  <p><b>2. Read before write.</b> Every new connection starts read-only.</p>
+  <p><b>3. Approvals in code.</b> Locks, the alarm, money and messages to other people always wait for your yes.</p>
+  <p><b>4. Spending limits</b> on every paid account.</p>
+  <p><b>5. Small steps, with tests.</b> One feature per change, and a list of everything it can do, kept up to date.</p>
+</div>
+
+<h3 class="group" id="prompt">STARTER PROMPT FOR YOUR AI CODING AGENT</h3>
+<p class="gintro">Paste this into an AI coding agent in an empty folder on your Linux machine. Then build one step at a time.</p>
+<div class="card prompt">
+<pre id="sp"><code>I want to build my own personal AI assistant called [NAME] that runs on this
+Ubuntu machine. Build it in small steps, each one working and tested before
+the next. Use Python with uv, keep all keys in a .env file (never in git), and
+keep a plain-English HANDBOOK.md of everything it can do.
+
+Step 1 now: a terminal chat that uses an AI model's API with tool use. Add one
+tool, get_time. Each tool must declare its effect: read, minor or
+consequential. Consequential tools must never run without my approval (we'll
+add Telegram approvals in a later step; for now, ask in the terminal).
+
+Ask me questions before you start if anything is unclear. Show me how to run it
+and how to test it.</code></pre>
+<button class="copy" type="button" id="copy">Copy prompt</button>
+</div>
+
+<h3 class="group">WHAT'S NEXT IN THE SERIES</h3>
+<div class="next">
+  <div class="f"><span class="num">1</span><div><b>Avan, my own Jarvis</b><span>This guide.</span></div></div>
+  <div class="f"><span class="num">2</span><div><b>Home Assistant</b><span>How the house is wired, and how the assistant controls it safely.</span></div></div>
+  <div class="f"><span class="num">3</span><div><b>The TV</b><span>A custom TV home screen the assistant runs.</span></div></div>
+  <div class="f"><span class="num">4</span><div><b>The AI office</b><span>A team of AI agents, one per project, working while I sleep.</span></div></div>
+</div>
+
+<p class="foot">Follow <a href="https://www.instagram.com/dilgrover/">@dilgrover</a> for the next parts. Questions? Comment on the reel.<br>Built and tested in my own home. Your setup will differ: test each step, and keep your keys safe.</p>
+</div>
+<script>
+document.getElementById('copy').addEventListener('click',async function(){
+  const t=document.getElementById('sp').innerText;
+  try{await navigator.clipboard.writeText(t);this.textContent='Copied ✓'}catch(e){this.textContent='Select and copy above'}
+  setTimeout(()=>{this.textContent='Copy prompt'},2200);
+});
+</script>
+</body>
+</html>
