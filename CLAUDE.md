@@ -12,11 +12,13 @@ Dhiren Grover's link-in-bio site. Live at https://dilgrover.github.io (GitHub Pa
 
 ## Layout
 - `index.html`: home page. Sections, top to bottom: header, **RESOURCES · FREE** (resource cards, newest first), FOLLOW · MAIN, TRAVEL, GAMING, MY PODCAST · SOCIAL UNTOLD, COMING SOON.
-- `avan/index.html`: "Build your own Jarvis" guide, part 1 of 4 (what Avan does, what you need, real monthly costs, how it fits, 9 build steps, safety rules, a copyable starter prompt, the series). The page the "BUILD" comment keyword on the Avan reel sends people to. Newest resource card on the home page (7 Nov 2026).
+- `doomsday/index.html`: "Doomsday for TV" guide (what the app does, install on Google TV and Fire TV with Downloader, the four picture codes from the reel with copy buttons, tips, questions). The page the "DOOM" comment keyword sends people to. Newest resource card on the home page (10 Nov 2026). Images are frames from D's TV recordings (`assets/doomsday-*.jpg`).
+- `doom.apk` (site root, not `downloads/`, so it's short to type on a TV remote): a copy of the doomsday-tv release APK (v1.3.3). When dilgrover/doomsday-tv makes a new release, replace this file.
+- `avan/index.html`: "Build your own Jarvis" guide, part 1 of 4 (what Avan does, what you need, real monthly costs, how it fits, 9 build steps, safety rules, a copyable starter prompt, the series). The page the "BUILD" comment keyword on the Avan reel sends people to. Resource card on the home page (7 Nov 2026).
 - `switzerland/index.html`: "Our Swiss Shortlist" travel guide (12 spots by region, DDLJ filming trail, driving tips, suggested order). This is the page the "SWISS" comment keyword sends people to.
 - `desk/index.html`: desk setup gear list (12 products).
 - `downloads/`: files people can download (PDFs, images, route lists).
-- `assets/`: images (`desk-banner.jpg`, `swiss-banner.jpg` (card banner and the Swiss page's link preview), `swiss-matterhorn.jpg` (Swiss page hero), `avan-orb.jpg` also used as favicon, `avan-banner.jpg` (Avan guide hero) and `avan-og.jpg` (its card banner and link preview), `og.jpg` link preview).
+- `assets/`: images (`desk-banner.jpg`, `swiss-banner.jpg` (card banner and the Swiss page's link preview), `swiss-matterhorn.jpg` (Swiss page hero), `avan-orb.jpg` also used as favicon, `avan-banner.jpg` (Avan guide hero) and `avan-og.jpg` (its card banner and link preview), `og.jpg` link preview, `doomsday-*.jpg` (Doomsday guide: hero, shots, the four picture-slot thumbnails, `doomsday-og.jpg` card banner and link preview)).
 
 ## Adding a new resource (page or download)
 1. Create a folder named after it, e.g. `swiss-route/index.html`. Copy `desk/index.html` as the template (keep the `← All links` back link, the head meta and the styles).
@@ -28,6 +30,7 @@ Dhiren Grover's link-in-bio site. Live at https://dilgrover.github.io (GitHub Pa
 Copy an existing `<a class="btn">` in the relevant section of `index.html`, keeping the "Name / @handle · short description" pattern.
 
 ## Pending
+- Doomsday guide: keep `doom.apk` in step with doomsday-tv releases. The picture codes are D's tinyurl links (dooms-hall, dooms-mask, dooms-tapestry, dooms-throne); if he changes them, update the page.
 - Avan guide: parts 2–4 (Home Assistant, the TV, the AI office) as their reels come out; add them as sections or new pages and link them from part 1's "What's next".
 - Swiss guide: add the mountain pass road and the sunset lake from the Switzerland reel once the owner names them.
 - Confirm whether @travelseri is Instagram (currently linked as Instagram).

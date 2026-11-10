@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Doomsday for TV · Dhiren Grover</title>
+<meta name="description" content="A free Avengers: Doomsday countdown for Google TV and Fire TV that brings your pictures to life. How to install it, the picture codes from my reel, and every feature.">
+<meta property="og:title" content="Doomsday for TV: the free countdown app">
+<meta property="og:description" content="Install it on Google TV or Fire TV in 5 minutes, plus the picture codes from my reel.">
+<meta property="og:image" content="https://dilgrover.github.io/assets/doomsday-og.jpg">
+<link rel="icon" href="../assets/avan-orb.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+body{margin:0}
+/* Layout: the Avan guide's phone-first column and styles. Sections: what it does, install (Google TV, Fire TV), the picture codes, tips, questions. */
+:root{
+  --bg:#0a0710; --panel:#120c1b; --line:rgba(255,255,255,.09); --fg:#f6f1f8; --muted:rgba(246,241,248,.66);
+  --pink:#ff3d9a; --pink-soft:#ff8cc6; --glow:rgba(255,61,154,.35);
+  --display:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--display);font-size:16px;line-height:1.55;
+  background-image:radial-gradient(120% 60% at 50% -10%,rgba(255,61,154,.16),transparent 60%);background-repeat:no-repeat}
+.wrap{max-width:640px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:calc(28px + env(safe-area-inset-top,0px)) calc(48px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:16px}
+.back{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;color:var(--pink-soft);text-decoration:none;align-self:flex-start}
+.hero{position:relative;margin:0;border-radius:22px;overflow:hidden;border:1px solid rgba(255,61,154,.55);box-shadow:0 0 40px var(--glow);background:var(--panel)}
+.hero img{display:block;width:100%;aspect-ratio:4/5;max-height:520px;object-fit:cover;object-position:center 40%}
+.hero figcaption{position:absolute;inset:auto 0 0 0;padding:80px 20px 18px;background:linear-gradient(to top,rgba(10,7,16,.95),rgba(10,7,16,0))}
+.kick{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--pink-soft)}
+h1{font-weight:800;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-spacing:-.03em;margin:8px 0 0;text-wrap:balance}
+h1 span{color:var(--pink)}
+.lede{color:var(--muted);margin:0}
+.lede b{color:var(--fg);font-weight:700}
+.jump{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.jump a{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-decoration:none;color:var(--fg);padding:7px 12px;border-radius:999px;border:1px solid rgba(255,61,154,.6);background:rgba(255,61,154,.08)}
+.jump a:hover{box-shadow:0 0 16px var(--glow)}
+a:focus-visible{outline:2px solid var(--pink-soft);outline-offset:3px}
+.group{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--pink-soft);margin:24px 0 0;scroll-margin-top:16px}
+.gintro{color:var(--muted);font-size:15px;margin:-8px 0 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.card p b{color:var(--fg)}
+h2{margin:0;font-weight:700;font-size:21px;line-height:1.2;letter-spacing:-.01em;text-wrap:balance}
+.feat{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.f{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px}
+.f b{display:block;font-size:15.5px;margin-bottom:3px}
+.f span{color:var(--muted);font-size:14px;line-height:1.4;display:block}
+@media (max-width:420px){.feat{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--pink-soft);font-weight:500;text-transform:uppercase}
+td.c{white-space:nowrap;font-variant-numeric:tabular-nums}
+td small{display:block;color:var(--muted);font-size:13px}
+.tablebox{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:6px 10px;overflow-x:auto}
+.flow{display:flex;flex-direction:column;gap:8px;align-items:stretch}
+.node{border:1px solid rgba(255,61,154,.5);background:rgba(255,61,154,.06);border-radius:14px;padding:10px 14px}
+.node b{display:block}
+.node span{color:var(--muted);font-size:14px}
+.node.core{border-color:var(--pink);box-shadow:0 0 22px var(--glow);background:rgba(255,61,154,.12)}
+.arrow{text-align:center;color:var(--pink-soft);font-family:var(--mono);font-size:13px;line-height:1}
+.row3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+@media (max-width:420px){.row3{grid-template-columns:1fr}}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.step .n{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;color:var(--pink-soft)}
+.step p{margin:0;color:var(--muted);font-size:15px}
+.step p b{color:var(--fg)}
+.step ul{margin:0;padding-left:20px;color:var(--muted);font-size:15px}
+.step li{margin:3px 0}
+.step li b{color:var(--fg)}
+pre{margin:0;background:#07050b;border:1px solid var(--line);border-radius:12px;padding:14px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.55;color:#f3e9f7}
+code{font-family:var(--mono);font-size:.9em;color:var(--pink-soft)}
+pre code{color:inherit;font-size:inherit}
+.tip{font-size:14.5px;color:var(--fg)!important;border-left:3px solid var(--pink);padding:1px 0 1px 12px}
+.tip b{color:var(--pink-soft)}
+.prompt{position:relative}
+.copy{align-self:flex-start;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:#fff;background:var(--pink);border:0;border-radius:999px;padding:9px 16px;cursor:pointer;min-height:40px}
+.copy:hover{box-shadow:0 0 16px var(--glow)}
+.next{display:grid;gap:10px}
+.next .f{display:flex;gap:12px;align-items:flex-start}
+.next .num{font-family:var(--mono);font-size:12px;color:#fff;background:var(--pink);border-radius:8px;padding:3px 8px;flex:none}
+.foot{color:var(--muted);font-size:13.5px;text-align:center;margin-top:18px}
+.foot a{color:var(--pink-soft)}
+
+.hero img{height:auto;aspect-ratio:16/9;max-height:none;object-position:center}
+.hero figcaption{position:static;padding:14px 18px 16px;background:var(--panel)}
+.shot{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#000}
+.shot img{display:block;width:100%;height:auto;aspect-ratio:16/9}
+.shot figcaption{font-size:13.5px;color:var(--muted);padding:8px 12px;background:var(--panel)}
+.dl{display:flex;flex-wrap:wrap;gap:10px}
+.btnp{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;color:#fff;background:var(--pink);border-radius:999px;padding:12px 20px;min-height:44px}
+.btnp.alt{background:transparent;border:1px solid rgba(255,61,154,.6);color:var(--fg)}
+.btnp:hover{box-shadow:0 0 18px var(--glow)}
+.type{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#07050b;border:1px solid rgba(255,61,154,.5);border-radius:12px;padding:12px 14px;font-family:var(--mono);font-size:16px;color:#fff;overflow-wrap:anywhere}
+.codes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (max-width:420px){.codes{grid-template-columns:1fr}}
+.code{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.code img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.type span{flex:1;min-width:0}.type .cp{flex:none}
+.code .cb{padding:12px;display:flex;flex-direction:column;gap:8px}
+.code .slot{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--pink-soft)}
+.code .val{font-family:var(--mono);font-size:17px;color:#fff}
+.code .val small{color:var(--muted);font-size:12px}
+.cp{align-self:flex-start;font-family:var(--mono);font-size:12px;color:#fff;background:transparent;border:1px solid rgba(255,61,154,.6);border-radius:999px;padding:7px 12px;cursor:pointer;min-height:36px}
+.note{font-size:13.5px;color:var(--muted);border:1px dashed var(--line);border-radius:12px;padding:10px 12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../">← All links</a>
+
+<figure class="hero">
+  <img src="../assets/doomsday-hero.jpg" alt="The Doomsday app on a TV: the countdown over a lit hall with a cloaked figure and a burning torch" width="1600" height="893">
+  <figcaption>
+    <div class="kick">FREE TV APP · GOOGLE TV · FIRE TV</div>
+    <h1>Doomsday <span>for TV</span></h1>
+  </figcaption>
+</figure>
+
+<p class="lede">The countdown from my reel. Every time I press Home, my TV shows how long is left until <b>Avengers: Doomsday</b> (16 December), on a picture that's alive. It's <b>free, with no account and no ads</b>. Here's how to put it on your TV, and the picture codes I use.</p>
+
+<div class="dl">
+  <a class="btnp" href="#install">Install it <span>↓</span></a>
+  <a class="btnp alt" href="https://github.com/dilgrover/doomsday-tv/releases/latest" target="_blank" rel="noopener">Download page <span>↗</span></a>
+</div>
+
+<ul class="jump">
+  <li><a href="#does">What it does</a></li>
+  <li><a href="#install">Install</a></li>
+  <li><a href="#codes">Picture codes</a></li>
+  <li><a href="#tips">Tips</a></li>
+  <li><a href="#faq">Questions</a></li>
+</ul>
+
+<h3 class="group" id="does">WHAT IT DOES</h3>
+<div class="feat">
+  <div class="f"><b>The countdown</b><span>Months, days, hours, minutes and seconds, in the film's style, with rolling digits.</span></div>
+  <div class="f"><b>Living pictures</b><span>The light breathes, mist drifts, dust hangs in the air, and the camera moves slowly.</span></div>
+  <div class="f"><b>Energy follows you</b><span>Move along the buttons and green energy jumps to wherever you are. Leave it, and it powers up by itself.</span></div>
+  <div class="f"><b>Summon</b><span>Hold OK for two seconds: the room darkens, rings run across the floor, a flash.</span></div>
+  <div class="f"><b>Your own pictures</b><span>Four slots, filled by link. Rotate goes through them every 1, 5 or 15 minutes.</span></div>
+  <div class="f"><b>Date, clock, weather</b><span>Along the top, for your town.</span></div>
+  <div class="f"><b>All your apps</b><span>One press up from the buttons, in the order you choose.</span></div>
+  <div class="f"><b>Screensaver</b><span>The countdown when the TV is idle (Google TV).</span></div>
+</div>
+<figure class="shot"><img src="../assets/doomsday-energy.jpg" alt="The countdown over the Mask picture, glowing green energy around the figure" width="1600" height="893" loading="lazy"><figcaption>The Mask picture, with the energy running.</figcaption></figure>
+<figure class="shot"><img src="../assets/doomsday-summon.jpg" alt="The Summon flash: a burst of green and white light over the countdown" width="1600" height="893" loading="lazy"><figcaption>Summon: hold OK for two seconds.</figcaption></figure>
+
+<h3 class="group" id="install">INSTALL IT (ABOUT 5 MINUTES)</h3>
+<p class="gintro">It isn't in an app store, so you install it with a free app called <b>Downloader</b>. This is safe and normal on Google TV and Fire TV ("sideloading").</p>
+<div class="card">
+  <h2>The link to type in Downloader</h2>
+  <div class="type"><span id="apk">dilgrover.github.io/doom.apk</span><button class="cp" type="button" data-copy="apk">Copy</button></div>
+  <p>Or get it from the <a href="https://github.com/dilgrover/doomsday-tv/releases/latest" style="color:var(--pink-soft)">download page on GitHub</a> (the <code>.apk</code> file), where the code is too.</p>
+</div>
+
+<div class="step">
+  <div class="n">GOOGLE TV · ANDROID TV</div>
+  <h2>Chromecast with Google TV, Sony, TCL, Hisense…</h2>
+  <ul>
+    <li>Install <b>Downloader</b> (by AFTVnews) from the Play Store on the TV.</li>
+    <li>Turn on developer options: <b>Settings → System → About</b>, then press <b>Android TV OS build</b> 7 times.</li>
+    <li><b>Settings → Apps → Security &amp; restrictions → Unknown sources</b> → allow <b>Downloader</b>.</li>
+    <li>Open Downloader, type <code>dilgrover.github.io/doom.apk</code>, press <b>Go</b>, then <b>Install</b>.</li>
+    <li>Open <b>Doomsday</b> from your apps. Delete the downloaded file when Downloader asks, to save space.</li>
+  </ul>
+</div>
+<div class="step">
+  <div class="n">AMAZON FIRE TV</div>
+  <h2>Fire TV Stick, Cube, Fire TV televisions</h2>
+  <ul>
+    <li>Search for <b>Downloader</b> in the Amazon Appstore and install it.</li>
+    <li><b>Settings → My Fire TV → Developer options → Install unknown apps</b> → turn on <b>Downloader</b>. No Developer options? <b>My Fire TV → About</b>, press your device's name 7 times, then go back.</li>
+    <li>Open Downloader, type <code>dilgrover.github.io/doom.apk</code>, press <b>Go</b>, then <b>Install</b>.</li>
+    <li>Open <b>Doomsday</b> from <b>Your apps &amp; games</b>.</li>
+  </ul>
+</div>
+<p class="tip"><b>Make it your home screen:</b> the first time you open it, it asks "Make Doomsday your home screen?" and shows you how. On Google TV it's one switch; Fire TV may not allow it.</p>
+
+<h3 class="group" id="codes">THE PICTURE CODES FROM MY REEL</h3>
+<p class="gintro">In the app, open <b>Pictures</b>, pick a slot's link box and press <b>OK</b>. The box already starts with <code>https://tinyurl.com/</code>, so you only type the code. Then press <b>Download</b>.</p>
+<figure class="shot"><img src="../assets/doomsday-pictures.jpg" alt="The app's Pictures screen with four slots, Hall, Mask, Tapestry and Throne, each with its tinyurl link" width="1600" height="893" loading="lazy"><figcaption>The Pictures screen, with all four codes in.</figcaption></figure>
+<div class="codes">
+  <div class="code"><img src="../assets/doomsday-slot-hall.jpg" alt="Hall picture" loading="lazy"><div class="cb"><span class="slot">HALL</span><span class="val" id="c1">dooms-hall</span><button class="cp" type="button" data-copy="c1">Copy</button></div></div>
+  <div class="code"><img src="../assets/doomsday-slot-mask.jpg" alt="Mask picture" loading="lazy"><div class="cb"><span class="slot">MASK</span><span class="val" id="c2">dooms-mask</span><button class="cp" type="button" data-copy="c2">Copy</button></div></div>
+  <div class="code"><img src="../assets/doomsday-slot-tapestry.jpg" alt="Tapestry picture" loading="lazy"><div class="cb"><span class="slot">TAPESTRY</span><span class="val" id="c3">dooms-tapestry</span><button class="cp" type="button" data-copy="c3">Copy</button></div></div>
+  <div class="code"><img src="../assets/doomsday-slot-throne.jpg" alt="Throne picture" loading="lazy"><div class="cb"><span class="slot">THRONE</span><span class="val" id="c4">dooms-throne</span><button class="cp" type="button" data-copy="c4">Copy</button></div></div>
+</div>
+<p class="note">Typing on a TV remote is slow: the app's keyboard has a <code>tinyurl.com/</code> key, and you can also use your own pictures. The full link for each is <code>https://tinyurl.com/</code> + the code.</p>
+
+<h3 class="group" id="tips">TIPS</h3>
+<div class="card">
+  <p><b>Your own pictures:</b> the link must open the picture itself, not a page around it. Wide (16:9) and large (1920×1080 or 4K) works best, darker on the left so the countdown reads well, with something bright in the middle to come alive: windows, torches, a glowing floor.</p>
+  <p><b>Make a short link</b> at tinyurl.com and choose your own ending (for example <code>my-hall</code>). Then you only type <code>my-hall</code> in the app. Google Drive and Dropbox links need changing first: <a href="https://github.com/dilgrover/doomsday-tv/blob/main/docs/PICTURES.md" style="color:var(--pink-soft)">how to</a>.</p>
+  <p><b>Apps row:</b> press Up from the buttons. To reorder, hold OK on an app, move it, and OK to put it down.</p>
+  <p><b>Settings:</b> clock (24 or 12 hour), weather and your town, Effects (Full or Calm), dim at night, a soft ticking sound, and the screensaver.</p>
+</div>
+<figure class="shot"><img src="../assets/doomsday-apps.jpg" alt="The apps row slid up under the countdown" width="1600" height="893" loading="lazy"><figcaption>Your apps, one press up.</figcaption></figure>
+<figure class="shot"><img src="../assets/doomsday-screensaver.jpg" alt="The countdown over the Throne picture, green windows and mist" width="1600" height="893" loading="lazy"><figcaption>The Throne picture, as the screensaver.</figcaption></figure>
+
+<h3 class="group" id="faq">QUESTIONS</h3>
+<div class="card">
+  <p><b>Is it really free?</b> Yes. No account, no sign-in, no ads, nothing tracked. The code is open on <a href="https://github.com/dilgrover/doomsday-tv" style="color:var(--pink-soft)">GitHub</a>.</p>
+  <p><b>Does it work on Fire TV?</b> Yes. The screensaver and the Home button are Google TV only; Fire TV may not allow them.</p>
+  <p><b>"The site didn't let the TV download it"?</b> Some sites block TVs. Use a Google Drive, Dropbox or direct image link, made short with tinyurl.</p>
+  <p><b>Does it go online?</b> Only to download your pictures (when you press Download) and to read the weather for your town.</p>
+  <p><b>Updates?</b> New versions go on the <a href="https://github.com/dilgrover/doomsday-tv/releases/latest" style="color:var(--pink-soft)">download page</a>; the link above always has the latest I've tested.</p>
+</div>
+
+<p class="foot">Fan-made. Not affiliated with or endorsed by Marvel Studios or Disney. The app includes no film images; the pictures are links you choose.<br>Follow <a href="https://www.instagram.com/dilgrover/">@dilgrover</a> for more builds. Questions? Comment on the reel.</p>
+</div>
+<script>
+document.querySelectorAll('.cp').forEach(function(b){b.addEventListener('click',async function(){
+  var t=document.getElementById(b.dataset.copy).innerText,o=b.textContent;
+  try{await navigator.clipboard.writeText(t);b.textContent='Copied ✓'}catch(e){b.textContent='Select and copy'}
+  setTimeout(function(){b.textContent=o},2000);
+})});
+</script>
+</body>
+</html>
