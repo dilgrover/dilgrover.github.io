@@ -12,7 +12,8 @@ Dhiren Grover's link-in-bio site. Live at https://dilgrover.github.io (GitHub Pa
 
 ## Layout
 - `index.html`: home page. Sections, top to bottom: header, **RESOURCES · FREE** (resource cards, newest first), FOLLOW · MAIN, TRAVEL, GAMING, MY PODCAST · SOCIAL UNTOLD, COMING SOON.
-- `doomsday/index.html`: "Doomsday for TV" guide (what the app does, install on Google TV and Fire TV with Downloader, the four picture codes from the reel with copy buttons, tips, questions). The page the "DOOM" comment keyword sends people to. Newest resource card on the home page (10 Nov 2026). Images are frames from D's TV recordings (`assets/doomsday-*.jpg`).
+- `tv/index.html`: "Build your own TV home screen" guide, part 3 of 4 (what the Avan TV launcher does, a screens gallery, what you need, costs, how it fits, 10 build steps, safety rules, four copyable prompts, the series). The page the reel 3 (TV) comment keyword sends people to. Newest resource card on the home page (12 Nov 2026); part 1's "What's next" links to it. Images are sample-data screenshots from the app (`assets/tv-*.jpg`, `tv-og.jpg` card banner and link preview): never frames with real data.
+- `doomsday/index.html`: "Doomsday for TV" guide (what the app does, install on Google TV and Fire TV with Downloader, the four picture codes from the reel with copy buttons, tips, questions). The page the "DOOM" comment keyword sends people to. Resource card on the home page (10 Nov 2026). Images are frames from D's TV recordings (`assets/doomsday-*.jpg`).
 - `doom.apk` (site root, not `downloads/`, so it's short to type on a TV remote): a copy of the doomsday-tv release APK (v1.3.3). When dilgrover/doomsday-tv makes a new release, replace this file.
 - `avan/index.html`: "Build your own Jarvis" guide, part 1 of 4 (what Avan does, what you need, real monthly costs, how it fits, 9 build steps, safety rules, a copyable starter prompt, the series). The page the "BUILD" comment keyword on the Avan reel sends people to. Resource card on the home page (7 Nov 2026).
 - `switzerland/index.html`: "Our Swiss Shortlist" travel guide (12 spots by region, DDLJ filming trail, driving tips, suggested order). This is the page the "SWISS" comment keyword sends people to.
@@ -31,7 +32,8 @@ Copy an existing `<a class="btn">` in the relevant section of `index.html`, keep
 
 ## Pending
 - Doomsday guide: keep `doom.apk` in step with doomsday-tv releases. The picture codes are D's tinyurl links (dooms-hall, dooms-mask, dooms-tapestry, dooms-throne); if he changes them, update the page.
-- Avan guide: parts 2–4 (Home Assistant, the TV, the AI office) as their reels come out; add them as sections or new pages and link them from part 1's "What's next".
+- Avan guide: parts 2 and 4 (Home Assistant, the AI office) as their reels come out; add them as new pages like `tv/` and link them from part 1's "What's next". Part 3 (the TV) is live at `tv/`.
+- TV guide: when Orbit Launcher (the open-source version) is released, add its GitHub link and APK to the TV guide.
 - Swiss guide: add the mountain pass road and the sunset lake from the Switzerland reel once the owner names them.
 - Confirm whether @travelseri is Instagram (currently linked as Instagram).
 - When the `avan` repo goes public, replace the COMING SOON card with a real "Avan on GitHub" link.

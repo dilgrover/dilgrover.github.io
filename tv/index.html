@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Build Your Own TV Home Screen · Dhiren Grover</title>
+<meta name="description" content="How I built my own TV home screen for Google TV: what it does, what you need, what it costs, the steps and the prompts to build yours. Part 3 of 4.">
+<meta property="og:title" content="Build your own TV home screen: the Avan TV guide">
+<meta property="og:description" content="A custom home screen for your Google TV that knows your home: what you need, the steps and the prompts. Part 3 of 4.">
+<meta property="og:image" content="https://dilgrover.github.io/assets/tv-og.jpg">
+<link rel="icon" href="../assets/avan-orb.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+body{margin:0}
+/* TV launcher guide (part 3). Same column and identity as the Avan guide; the hero is a 16:9 TV frame and there's a screens gallery. */
+:root{
+  --bg:#0a0710; --panel:#120c1b; --line:rgba(255,255,255,.09); --fg:#f6f1f8; --muted:rgba(246,241,248,.66);
+  --pink:#ff3d9a; --pink-soft:#ff8cc6; --glow:rgba(255,61,154,.35);
+  --display:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--display);font-size:16px;line-height:1.55;
+  background-image:radial-gradient(120% 60% at 50% -10%,rgba(255,61,154,.16),transparent 60%);background-repeat:no-repeat}
+.wrap{max-width:640px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:calc(28px + env(safe-area-inset-top,0px)) calc(48px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:16px}
+.back{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;color:var(--pink-soft);text-decoration:none;align-self:flex-start}
+.hero{position:relative;margin:0;border-radius:22px;overflow:hidden;border:1px solid rgba(255,61,154,.55);box-shadow:0 0 40px var(--glow);background:var(--panel)}
+.hero img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.hero figcaption{padding-top:40px}
+.hero figcaption{position:absolute;inset:auto 0 0 0;padding:80px 20px 18px;background:linear-gradient(to top,rgba(10,7,16,.95),rgba(10,7,16,0))}
+.kick{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--pink-soft)}
+h1{font-weight:800;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-spacing:-.03em;margin:8px 0 0;text-wrap:balance}
+h1 span{color:var(--pink)}
+.lede{color:var(--muted);margin:0}
+.lede b{color:var(--fg);font-weight:700}
+.jump{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.jump a{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-decoration:none;color:var(--fg);padding:7px 12px;border-radius:999px;border:1px solid rgba(255,61,154,.6);background:rgba(255,61,154,.08)}
+.jump a:hover{box-shadow:0 0 16px var(--glow)}
+a:focus-visible{outline:2px solid var(--pink-soft);outline-offset:3px}
+.group{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--pink-soft);margin:24px 0 0;scroll-margin-top:16px}
+.gintro{color:var(--muted);font-size:15px;margin:-8px 0 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.card p b{color:var(--fg)}
+h2{margin:0;font-weight:700;font-size:21px;line-height:1.2;letter-spacing:-.01em;text-wrap:balance}
+.feat{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.f{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px}
+.f b{display:block;font-size:15.5px;margin-bottom:3px}
+.f span{color:var(--muted);font-size:14px;line-height:1.4;display:block}
+@media (max-width:420px){.feat{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--pink-soft);font-weight:500;text-transform:uppercase}
+td.c{white-space:nowrap;font-variant-numeric:tabular-nums}
+td small{display:block;color:var(--muted);font-size:13px}
+.tablebox{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:6px 10px;overflow-x:auto}
+.flow{display:flex;flex-direction:column;gap:8px;align-items:stretch}
+.node{border:1px solid rgba(255,61,154,.5);background:rgba(255,61,154,.06);border-radius:14px;padding:10px 14px}
+.node b{display:block}
+.node span{color:var(--muted);font-size:14px}
+.node.core{border-color:var(--pink);box-shadow:0 0 22px var(--glow);background:rgba(255,61,154,.12)}
+.arrow{text-align:center;color:var(--pink-soft);font-family:var(--mono);font-size:13px;line-height:1}
+.row3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+@media (max-width:420px){.row3{grid-template-columns:1fr}}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.step .n{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;color:var(--pink-soft)}
+.step p{margin:0;color:var(--muted);font-size:15px}
+.step p b{color:var(--fg)}
+.step ul{margin:0;padding-left:20px;color:var(--muted);font-size:15px}
+.step li{margin:3px 0}
+.step li b{color:var(--fg)}
+pre{margin:0;background:#07050b;border:1px solid var(--line);border-radius:12px;padding:14px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.55;color:#f3e9f7}
+code{font-family:var(--mono);font-size:.9em;color:var(--pink-soft)}
+pre code{color:inherit;font-size:inherit}
+.tip{font-size:14.5px;color:var(--fg)!important;border-left:3px solid var(--pink);padding:1px 0 1px 12px}
+.tip b{color:var(--pink-soft)}
+.prompt{position:relative}
+.copy{align-self:flex-start;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:#fff;background:var(--pink);border:0;border-radius:999px;padding:9px 16px;cursor:pointer;min-height:40px}
+.copy:hover{box-shadow:0 0 16px var(--glow)}
+.next{display:grid;gap:10px}
+.next .f{display:flex;gap:12px;align-items:flex-start}
+.next .num{font-family:var(--mono);font-size:12px;color:#fff;background:var(--pink);border-radius:8px;padding:3px 8px;flex:none}
+.foot{color:var(--muted);font-size:13.5px;text-align:center;margin-top:18px}
+.foot a{color:var(--pink-soft)}
+/* screens gallery */
+.shots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0}
+.shots figure{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.shots img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.shots figcaption{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted);padding:7px 10px}
+@media (max-width:420px){.shots{grid-template-columns:1fr}}
+.heroline{position:relative}
+.prompt pre{white-space:pre-wrap;word-break:break-word}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../">← All links</a>
+
+<figure class="hero">
+  <img src="../assets/tv-hero.jpg" alt="The Avan TV home screen: the orb in the middle, a greeting, today's plans on the left and the house on the right, over a night view of London" width="1280" height="720">
+</figure>
+<div class="heroline">
+  <div class="kick">FREE GUIDE · PART 3 OF 4</div>
+  <h1>Build your own <span>TV home screen</span></h1>
+</div>
+
+<p class="lede">This is the home screen on my living-room TV. I replaced Google TV's home with my own: it knows the weather, who's home, what's on today, the cricket, the music and the house. I'm not a full-time developer: an AI coding agent wrote the code while I described what I wanted and tested every step on the real TV. Here's <b>what it does, what you need, how the pieces fit, the steps, and the prompts I'd start with</b>.</p>
+
+<ul class="jump">
+  <li><a href="#does">What it does</a></li>
+  <li><a href="#need">What you need</a></li>
+  <li><a href="#cost">Costs</a></li>
+  <li><a href="#how">How it fits</a></li>
+  <li><a href="#steps">The steps</a></li>
+  <li><a href="#rules">Safety rules</a></li>
+  <li><a href="#prompt">Prompts</a></li>
+</ul>
+
+<h3 class="group" id="does">WHAT IT DOES</h3>
+<div class="feat">
+  <div class="f"><b>Opens like a film</b><span>A colour burst when the TV turns on, then the home screen.</span></div>
+  <div class="f"><b>Live weather</b><span>The background is a video loop that matches the weather outside: rain, night, snow.</span></div>
+  <div class="f"><b>Knows the day</b><span>Calendar, next prayer, the Tube, and a greeting for whoever's home.</span></div>
+  <div class="f"><b>Runs the house</b><span>Lights, scenes and music on any speaker, from the remote.</span></div>
+  <div class="f"><b>Cricket</b><span>Live scores, the full scorecard and ball-by-ball.</span></div>
+  <div class="f"><b>Prayer times</b><span>The day's times, a countdown and a dua for today.</span></div>
+  <div class="f"><b>Guest mode</b><span>Guests get the apps and casting, nothing private. A PIN takes it back.</span></div>
+  <div class="f"><b>Ask Avan</b><span>My AI assistant can answer, play music or show things on it.</span></div>
+</div>
+
+<h3 class="group">THE SCREENS</h3>
+<p class="gintro">Real screenshots from the app, with sample data.</p>
+<div class="shots">
+  <figure><img src="../assets/tv-opening.jpg" alt="The opening: colour strands bursting from the orb" loading="lazy" width="960" height="540"><figcaption>THE OPENING</figcaption></figure>
+  <figure><img src="../assets/tv-rain.jpg" alt="The home screen on a rainy day" loading="lazy" width="960" height="540"><figcaption>HOME · RAIN</figcaption></figure>
+  <figure><img src="../assets/tv-lights.jpg" alt="The Lights screen with rooms and scenes" loading="lazy" width="960" height="540"><figcaption>LIGHTS</figcaption></figure>
+  <figure><img src="../assets/tv-music.jpg" alt="Now playing, with speakers to pick from" loading="lazy" width="960" height="540"><figcaption>MUSIC</figcaption></figure>
+  <figure><img src="../assets/tv-cricket.jpg" alt="The Cricket screen with a live Test score" loading="lazy" width="960" height="540"><figcaption>CRICKET</figcaption></figure>
+  <figure><img src="../assets/tv-prayer.jpg" alt="Prayer times with the dua for today" loading="lazy" width="960" height="540"><figcaption>PRAYER</figcaption></figure>
+  <figure><img src="../assets/tv-guest.jpg" alt="Guest view: apps and casting only" loading="lazy" width="960" height="540"><figcaption>GUEST MODE</figcaption></figure>
+  <figure><img src="../assets/tv-diwali.jpg" alt="The home screen dressed up for Diwali" loading="lazy" width="960" height="540"><figcaption>FESTIVALS</figcaption></figure>
+</div>
+
+<h3 class="group" id="need">WHAT YOU NEED</h3>
+<div class="card">
+  <h2>A Google TV or Android TV box</h2>
+  <p>Mine is a <b>Chromecast with Google TV (4K)</b>. A Google TV Streamer, an Nvidia Shield or a TV with Google TV built in works too. Nothing is flashed or rooted: it's a normal app that you install yourself, and Google TV stays underneath.</p>
+</div>
+<div class="card">
+  <h2>A computer to build and install from</h2>
+  <p>Any PC or Mac with <b>adb</b> (Android's free install tool). The app can be built on your computer with Android Studio, or in the cloud with GitHub Actions if your computer is small. Mine builds on GitHub and installs from my home server.</p>
+</div>
+<div class="card">
+  <h2>Home Assistant (for the smart parts)</h2>
+  <p>The time, apps, weather loops and guest mode work without it. For lights, music, the car, energy and who's home, you need <b>Home Assistant</b>, plus a small server between it and the TV (step 6). I use my assistant, Avan, for that: <a href="../avan/" style="color:var(--pink-soft)">part 1 shows how to build it</a>.</p>
+</div>
+<div class="card">
+  <h2>An AI coding agent</h2>
+  <p>You describe each screen in plain words, it writes the Kotlin and the tests, you install it on the TV and check. The prompts below are where I'd start.</p>
+  <p class="tip"><b>Skill you do need:</b> patience to test every step on the real TV, with the remote in your hand.</p>
+</div>
+
+<h3 class="group" id="cost">WHAT IT COSTS</h3>
+<div class="tablebox">
+<table>
+  <thead><tr><th>Item</th><th>Cost</th></tr></thead>
+  <tbody>
+    <tr><td>Google TV box<small>If your TV doesn't have Google TV already</small></td><td class="c">£30 – £100 once</td></tr>
+    <tr><td>Android Studio, adb, Kotlin<small>All free</small></td><td class="c">Free</td></tr>
+    <tr><td>Builds in the cloud<small>GitHub Actions; the free minutes cover a hobby project. Set a spending limit</small></td><td class="c">Free, or a few $</td></tr>
+    <tr><td>Home Assistant<small>Free to run yourself</small></td><td class="c">Free</td></tr>
+    <tr><td>Weather video loops<small>Free stock clips, or make your own with an AI video tool</small></td><td class="c">Free – a few £</td></tr>
+    <tr><td>Cricket, news, prayer times<small>Free public feeds and Home Assistant's own integrations</small></td><td class="c">Free</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3 class="group" id="how">HOW THE PIECES FIT</h3>
+<div class="card">
+  <div class="flow">
+    <div class="node core"><b>The TV app (launcher)</b><span>Draws every screen, plays the weather loop, handles the remote. Holds no passwords.</span></div>
+    <div class="arrow">↕ live state · its own key</div>
+    <div class="node"><b>Your home server</b><span>Reads Home Assistant, decides what the TV may see (guests, private things), and carries out what the TV asks, after checking it's allowed.</span></div>
+    <div class="arrow">↕</div>
+    <div class="row3">
+      <div class="node"><b>Home Assistant</b><span>lights, music, car, energy, who's home</span></div>
+      <div class="node"><b>Public feeds</b><span>weather, cricket, news</span></div>
+      <div class="node"><b>Your assistant</b><span>"show it on the TV"</span></div>
+    </div>
+  </div>
+  <p>The one rule that makes this safe: <b>the TV never holds your Home Assistant token</b>. A guest with the remote can only ever see and do what your server allows.</p>
+</div>
+
+<h3 class="group" id="steps">THE STEPS (BUILD IN THIS ORDER)</h3>
+<p class="gintro">Each step works on the real TV before you start the next.</p>
+
+<div class="step">
+  <div class="n">STEP 1 · THE TV</div>
+  <h2>Turn on developer mode</h2>
+  <p>On the TV: <b>Settings → System → About</b>, press OK on <b>Android TV OS build</b> seven times. Then in <b>Developer options</b> turn on <b>Wireless debugging</b>. Pair from your computer once, and you can install apps over Wi-Fi:</p>
+<pre><code>adb pair 192.168.1.50:37000      # the code shown on the TV
+adb connect 192.168.1.50:5555
+adb install -r launcher.apk</code></pre>
+</div>
+
+<div class="step">
+  <div class="n">STEP 2 · HELLO, TV</div>
+  <h2>A launcher app that shows your apps</h2>
+  <p>A Kotlin app for Android TV: the time, a greeting and a row of your installed apps with their own banners. Get it on the TV and open it from the apps list. Use the starter prompt below.</p>
+</div>
+
+<div class="step">
+  <div class="n">STEP 3 · THE HOME BUTTON</div>
+  <h2>Make Home open yours</h2>
+  <p>Google TV doesn't let you choose another home screen. The way round it is an <b>accessibility service</b> in your app that catches the Home button and opens yours (apps like Projectivy do the same). You turn it on once in the TV's accessibility settings.</p>
+  <p class="tip"><b>Don't</b> disable Google's own launcher with adb: the remote's YouTube button and Quick Settings stop working, and an update can undo it. A Google update can also switch the accessibility service off, so have the app check after each update.</p>
+</div>
+
+<div class="step">
+  <div class="n">STEP 4 · BUILT FOR THE REMOTE</div>
+  <h2>A home screen you drive with a D-pad</h2>
+  <p>Design at 1920×1080 with big text and a clear focus ring on whatever's selected. One bar of screens along the bottom. OK selects, Back closes. Aim for a smooth 60 fps on a cheap box: <b>no live blur</b>, one video at a time.</p>
+</div>
+
+<div class="step">
+  <div class="n">STEP 5 · LIVE WEATHER</div>
+  <h2>A background that matches outside</h2>
+  <p>Short (about 8 s) seamless video loops for clear, cloudy, rain, storm, snow, fog and night, played on the box's hardware decoder. Keep them on the TV, downloaded once, not inside the app, so updates stay small. Pick the loop from Home Assistant's weather.</p>
+</div>
+
+<div class="step">
+  <div class="n">STEP 6 · CONNECT YOUR HOME</div>
+  <h2>A small server between the TV and your house</h2>
+  <p>On your home server, add an endpoint that reads Home Assistant and sends the TV <b>only what it may show</b>, as one live stream. Pair the TV with a code it shows, approved on your phone. It gets its own key, which you can revoke on its own.</p>
+</div>
+
+<div class="step">
+  <div class="n">STEP 7 · THE SCREENS</div>
+  <h2>One screen at a time</h2>
+  <ul>
+    <li><b>Lights:</b> rooms, brightness, colour and scenes.</li>
+    <li><b>Music:</b> now playing and a speaker picker through <b>Music Assistant</b>.</li>
+    <li><b>Cricket, news:</b> free public feeds.</li>
+    <li><b>Prayer:</b> Home Assistant's Islamic prayer times.</li>
+    <li><b>Car, energy, internet:</b> whatever Home Assistant already knows.</li>
+  </ul>
+</div>
+
+<div class="step">
+  <div class="n">STEP 8 · GUESTS</div>
+  <h2>A view for visitors</h2>
+  <p>When someone who doesn't live with you is using the TV, show the apps, casting and a few safe screens. Nothing about the house or the family. A PIN switches back, and guest mode ends by itself at a set time or when you get home.</p>
+</div>
+
+<div class="step">
+  <div class="n">STEP 9 · THE FUN BITS</div>
+  <h2>Opening, festivals, previews</h2>
+  <p>A skippable opening animation, festival looks on the day, and a <b>Try it</b> screen that previews every weather and festival so you can show it off on a sunny day.</p>
+</div>
+
+<div class="step">
+  <div class="n">STEP 10 · TEST ON THE REAL TV</div>
+  <h2>Screenshots, not guesses</h2>
+  <p>After every change, install it and check on the TV. adb can take screenshots and short recordings, so the agent can look for itself:</p>
+<pre><code>adb exec-out screencap -p &gt; home.png
+adb shell screenrecord --time-limit 10 /sdcard/clip.mp4</code></pre>
+  <p class="tip"><b>My tip:</b> add a <b>sample-data mode</b> that fills the screens with made-up plans and names. Use it for every screenshot you share.</p>
+</div>
+
+<h3 class="group" id="rules">MY SAFETY RULES</h3>
+<div class="card">
+  <p><b>1. No keys on the TV.</b> Your server holds the Home Assistant token; the TV has its own revocable key.</p>
+  <p><b>2. Nothing on screen unless asked.</b> Your assistant only puts things on the TV when you ask.</p>
+  <p><b>3. Keep private things off the TV.</b> Health reminders, money, email and your address never go to the TV.</p>
+  <p><b>4. Guests see guest things.</b> Decide on the server what a guest may see, not in the app.</p>
+  <p><b>5. Locks and the alarm are never on the remote.</b></p>
+  <p><b>6. Sample data for screenshots.</b> Blur anything real before you post.</p>
+</div>
+
+<h3 class="group" id="prompt">PROMPTS FOR YOUR AI CODING AGENT</h3>
+<p class="gintro">Paste them in order, one when the last step works on your TV. Change the bits in brackets.</p>
+<p class="gintro"><b style="color:var(--fg)">1 · Starter: the app and the Home button</b></p>
+<div class="card prompt">
+<pre id="p1"><code>I want to build my own home screen (launcher) for my Google TV / Android TV
+box, called [NAME]. It's an app, not a new system: Google TV stays installed
+underneath. Build it in small steps, each one working and tested before the
+next. Kotlin, Jetpack Compose for TV, 1920x1080, everything usable with the
+remote's D-pad (clear focus rings, OK selects, Back closes). Keep a plain-
+English GUIDE.md of what it does and how to install it.
+
+Step 1 now: a launcher app that shows the time, a greeting and a row of my
+installed TV apps (with their own banners), declared as a TV launcher.
+Show me how to build the APK and install it on my TV over Wireless debugging
+with adb, and how to open it.
+
+Step 2: make the remote's Home button open it on Google TV, using an
+accessibility service that catches Home (Google TV doesn't let you pick a
+default launcher). Don't disable Google's launcher. Check after each update
+and on boot that Home still opens mine, and tell me if not.
+
+Ask me questions before you start if anything is unclear.</code></pre>
+<button class="copy" type="button" data-for="p1">Copy prompt</button>
+</div>
+<p class="gintro"><b style="color:var(--fg)">2 · Connect your home, safely</b></p>
+<div class="card prompt">
+<pre id="p2"><code>Next step for my TV launcher: connect it to my home, safely.
+
+- The TV must never hold my Home Assistant token. Add a small endpoint on my
+  home server that reads Home Assistant and sends the TV only what it may
+  show, as one live state stream (lights, music, weather, who's home).
+- Pairing: the TV shows a short code; I approve it on my phone; the TV gets
+  its own key that I can revoke on its own. Nothing typed with the remote.
+- Anything that changes the house (lights, scenes, music) goes through the
+  server, which checks it's allowed. Locks and the alarm: never from the TV.
+- Never send health reminders, money, email or my address to the TV.
+
+Write tests for the endpoint and for what the TV is allowed to see.</code></pre>
+<button class="copy" type="button" data-for="p2">Copy prompt</button>
+</div>
+<p class="gintro"><b style="color:var(--fg)">3 · The home screen and the screens</b></p>
+<div class="card prompt">
+<pre id="p3"><code>Next step for my TV launcher: the home screen and the screens.
+
+Home: greeting by who's home, the time, a Today card (calendar, next prayer
+or event, transport), a Home now card (lights on, room temperature, car,
+internet, energy), a music mini-player, and a bottom bar of screens. Behind
+it, a short seamless video loop for the weather right now (rain, clear,
+cloudy, night, snow), played on the hardware decoder and stored on the TV,
+not in the app.
+
+Then one screen at a time, each tested on the real TV before the next:
+Lights (rooms, brightness, scenes), Music (now playing through Music
+Assistant, pick a speaker), Cricket (live score from a public feed), and
+Settings. Keep 60 fps: no live blur, one video at a time.
+
+Add a sample-data mode, so I can take screenshots without my real data.</code></pre>
+<button class="copy" type="button" data-for="p3">Copy prompt</button>
+</div>
+<p class="gintro"><b style="color:var(--fg)">4 · Guests and polish</b></p>
+<div class="card prompt">
+<pre id="p4"><code>Next step for my TV launcher: guests, and polish.
+
+- Guest view: when someone who doesn't live here uses the TV, show only the
+  apps, casting and a few safe screens (news, cricket). Nothing about the
+  house or the family. A PIN screen to switch back, ending by itself at a
+  set time or when someone who lives here gets home.
+- An opening animation when the TV turns on (skippable, under 2.5 s).
+- Festival looks on the day (Diwali, Eid, Christmas...), and a "Try it"
+  screen that previews every weather, festival and guest view.
+- An "internet is down" state that still works for the house.
+
+Test each on the real TV over adb, with screenshots, before moving on.</code></pre>
+<button class="copy" type="button" data-for="p4">Copy prompt</button>
+</div>
+
+<h3 class="group">THE SERIES</h3>
+<div class="next">
+  <div class="f"><span class="num">1</span><div><b><a href="../avan/" style="color:inherit">Avan, my own Jarvis</a></b><span>The assistant behind it all.</span></div></div>
+  <div class="f"><span class="num">2</span><div><b>Home Assistant</b><span>How the house is wired, and how the assistant controls it safely.</span></div></div>
+  <div class="f"><span class="num">3</span><div><b>The TV</b><span>This guide.</span></div></div>
+  <div class="f"><span class="num">4</span><div><b>The AI office</b><span>A team of AI agents, one per project, working while I sleep.</span></div></div>
+</div>
+
+<p class="foot">Follow <a href="https://www.instagram.com/dilgrover/">@dilgrover</a> for the next parts. Questions? Comment on the reel.<br>Built and tested on my own TV. Yours will differ: test each step, and keep your keys safe. Google TV, Android TV and Chromecast are Google's trademarks; this is a personal project, not affiliated with Google.</p>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',async function(){
+    const t=document.getElementById(b.dataset.for).innerText;
+    try{await navigator.clipboard.writeText(t);b.textContent='Copied ✓'}catch(e){b.textContent='Select and copy above'}
+    setTimeout(function(){b.textContent='Copy prompt'},2200);
+  });
+});
+</script>
+</body>
+</html>
