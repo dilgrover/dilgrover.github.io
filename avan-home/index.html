@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>One AI For Your Whole Home · Dhiren Grover</title>
+<meta name="description" content="How my AI assistant runs my whole home through Home Assistant: what it does, what you need, what it costs, the steps and the prompts to build yours. Part 3 of 4.">
+<meta property="og:title" content="One AI for your whole home: the Avan + Home Assistant guide">
+<meta property="og:description" content="Replace your smart home apps with one AI: Home Assistant, the integrations, the safety rules and the prompts. Part 3 of 4.">
+<meta property="og:image" content="https://dilgrover.github.io/assets/home-og.jpg">
+<link rel="icon" href="../assets/avan-orb.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+body{margin:0}
+/* Home Assistant guide (part 3), same template as the TV guide (part 2). Same column and identity as the Avan guide; the hero is a 16:9 TV frame and there's a screens gallery. */
+:root{
+  --bg:#0a0710; --panel:#120c1b; --line:rgba(255,255,255,.09); --fg:#f6f1f8; --muted:rgba(246,241,248,.66);
+  --pink:#ff3d9a; --pink-soft:#ff8cc6; --glow:rgba(255,61,154,.35);
+  --display:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--display);font-size:16px;line-height:1.55;
+  background-image:radial-gradient(120% 60% at 50% -10%,rgba(255,61,154,.16),transparent 60%);background-repeat:no-repeat}
+.wrap{max-width:640px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:calc(28px + env(safe-area-inset-top,0px)) calc(48px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:16px}
+.back{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;color:var(--pink-soft);text-decoration:none;align-self:flex-start}
+.hero{position:relative;margin:0;border-radius:22px;overflow:hidden;border:1px solid rgba(255,61,154,.55);box-shadow:0 0 40px var(--glow);background:var(--panel)}
+.hero img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.hero figcaption{padding-top:40px}
+.hero figcaption{position:absolute;inset:auto 0 0 0;padding:80px 20px 18px;background:linear-gradient(to top,rgba(10,7,16,.95),rgba(10,7,16,0))}
+.kick{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--pink-soft)}
+h1{font-weight:800;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-spacing:-.03em;margin:8px 0 0;text-wrap:balance}
+h1 span{color:var(--pink)}
+.lede{color:var(--muted);margin:0}
+.lede b{color:var(--fg);font-weight:700}
+.jump{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.jump a{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-decoration:none;color:var(--fg);padding:7px 12px;border-radius:999px;border:1px solid rgba(255,61,154,.6);background:rgba(255,61,154,.08)}
+.jump a:hover{box-shadow:0 0 16px var(--glow)}
+a:focus-visible{outline:2px solid var(--pink-soft);outline-offset:3px}
+.group{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--pink-soft);margin:24px 0 0;scroll-margin-top:16px}
+.gintro{color:var(--muted);font-size:15px;margin:-8px 0 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.card p b{color:var(--fg)}
+h2{margin:0;font-weight:700;font-size:21px;line-height:1.2;letter-spacing:-.01em;text-wrap:balance}
+.feat{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.f{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px}
+.f b{display:block;font-size:15.5px;margin-bottom:3px}
+.f span{color:var(--muted);font-size:14px;line-height:1.4;display:block}
+@media (max-width:420px){.feat{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--pink-soft);font-weight:500;text-transform:uppercase}
+td.c{white-space:nowrap;font-variant-numeric:tabular-nums}
+td small{display:block;color:var(--muted);font-size:13px}
+.tablebox{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:6px 10px;overflow-x:auto}
+.flow{display:flex;flex-direction:column;gap:8px;align-items:stretch}
+.node{border:1px solid rgba(255,61,154,.5);background:rgba(255,61,154,.06);border-radius:14px;padding:10px 14px}
+.node b{display:block}
+.node span{color:var(--muted);font-size:14px}
+.node.core{border-color:var(--pink);box-shadow:0 0 22px var(--glow);background:rgba(255,61,154,.12)}
+.arrow{text-align:center;color:var(--pink-soft);font-family:var(--mono);font-size:13px;line-height:1}
+.row3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+@media (max-width:420px){.row3{grid-template-columns:1fr}}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.step .n{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;color:var(--pink-soft)}
+.step p{margin:0;color:var(--muted);font-size:15px}
+.step p b{color:var(--fg)}
+.step ul{margin:0;padding-left:20px;color:var(--muted);font-size:15px}
+.step li{margin:3px 0}
+.step li b{color:var(--fg)}
+pre{margin:0;background:#07050b;border:1px solid var(--line);border-radius:12px;padding:14px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.55;color:#f3e9f7}
+code{font-family:var(--mono);font-size:.9em;color:var(--pink-soft)}
+pre code{color:inherit;font-size:inherit}
+.tip{font-size:14.5px;color:var(--fg)!important;border-left:3px solid var(--pink);padding:1px 0 1px 12px}
+.tip b{color:var(--pink-soft)}
+.prompt{position:relative}
+.copy{align-self:flex-start;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:#fff;background:var(--pink);border:0;border-radius:999px;padding:9px 16px;cursor:pointer;min-height:40px}
+.copy:hover{box-shadow:0 0 16px var(--glow)}
+.next{display:grid;gap:10px}
+.next .f{display:flex;gap:12px;align-items:flex-start}
+.next .num{font-family:var(--mono);font-size:12px;color:#fff;background:var(--pink);border-radius:8px;padding:3px 8px;flex:none}
+.foot{color:var(--muted);font-size:13.5px;text-align:center;margin-top:18px}
+.foot a{color:var(--pink-soft)}
+/* screens gallery */
+.shots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0}
+.shots figure{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.shots img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.shots figcaption{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted);padding:7px 10px}
+@media (max-width:420px){.shots{grid-template-columns:1fr}}
+.heroline{position:relative}
+.prompt pre{white-space:pre-wrap;word-break:break-word}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../">← All links</a>
+
+<figure class="hero">
+  <img src="../assets/home-hero.jpg" alt="Avan's command centre: I said turn off all the lights, and Avan replied that every light in the flat is off" width="1280" height="720">
+</figure>
+<div class="heroline">
+  <div class="kick">FREE GUIDE · PART 3 OF 4</div>
+  <h1>One AI for your <span>whole home</span></h1>
+</div>
+
+<p class="lede">I stopped opening ten smart home apps. My AI assistant, Avan, runs the whole flat through <b>Home Assistant</b>: one sentence turns off every light, and it knows the car, the TV, the energy and who's home. I'm not a full-time developer: an AI coding agent did the code while I described what I wanted and tested each step at home. Here's <b>what it does, what you need, the integrations people don't think of, the steps, the safety rules and the prompt I'd start with</b>.</p>
+
+<ul class="jump">
+  <li><a href="#does">What it does</a></li>
+  <li><a href="#need">What you need</a></li>
+  <li><a href="#cost">Costs</a></li>
+  <li><a href="#how">How it fits</a></li>
+  <li><a href="#ints">Integrations</a></li>
+  <li><a href="#steps">The steps</a></li>
+  <li><a href="#rules">Safety rules</a></li>
+  <li><a href="#master">Master prompt</a></li>
+</ul>
+
+<h3 class="group" id="does">WHAT IT DOES</h3>
+<div class="feat">
+  <div class="f"><b>One sentence, whole house</b><span>"Turn off all the lights" checks every light it knows and switches them off.</span></div>
+  <div class="f"><b>It answers, not just obeys</b><span>"What's my car's range?" gets the range, the tyres and which door is open.</span></div>
+  <div class="f"><b>One screen</b><span>A wall dashboard with the whole house at a glance: rooms, weather, energy, music.</span></div>
+  <div class="f"><b>Lights that follow the TV</b><span>Hue bars glow with the picture, and switch to music mode for songs.</span></div>
+  <div class="f"><b>Knows who's home</b><span>From our phones, so screens and greetings change when we walk in.</span></div>
+  <div class="f"><b>The same brain everywhere</b><span>The command centre, my phone, a voice speaker and the TV all talk to one Avan.</span></div>
+</div>
+
+<h3 class="group">THE SCREENS</h3>
+<p class="gintro">Screenshots from my setup, with private things hidden or replaced with made-up ones.</p>
+<div class="shots">
+  <figure><img src="../assets/home-chat.jpg" alt="Asking Avan for the car's range in the command centre" loading="lazy" width="960" height="540"><figcaption>ASK AVAN</figcaption></figure>
+  <figure><img src="../assets/home-wall.jpg" alt="The wall dashboard: clocks for London, India and Pakistan, weather, indoor temperature, humidity and energy" loading="lazy" width="960" height="540"><figcaption>WALL SCREEN</figcaption></figure>
+  <figure><img src="../assets/home-integrations.jpg" alt="Part of my Home Assistant integrations list: Jaguar Land Rover, London TfL, Matter, Music Assistant" loading="lazy" width="960" height="540"><figcaption>INTEGRATIONS</figcaption></figure>
+  <figure><img src="../assets/home-hue.jpg" alt="The Media Wall controls: Hue Sync Box, light sync and mode" loading="lazy" width="960" height="540"><figcaption>HUE SYNC</figcaption></figure>
+  <figure><img src="../assets/home-scenes.jpg" alt="Lighting scenes: Rest, Relax, Blossom and more" loading="lazy" width="960" height="540"><figcaption>SCENES</figcaption></figure>
+  <figure><img src="../assets/home-energy.jpg" alt="Energy distribution from the smart meter, with low-carbon share" loading="lazy" width="960" height="540"><figcaption>ENERGY</figcaption></figure>
+  <figure><img src="../assets/home-tv.jpg" alt="The Avan TV home screen with made-up plans" loading="lazy" width="960" height="540"><figcaption>ON THE TV</figcaption></figure>
+  <figure><img src="../assets/home-tvlights.jpg" alt="The Lights screen on the TV" loading="lazy" width="960" height="540"><figcaption>TV · LIGHTS</figcaption></figure>
+</div>
+
+<h3 class="group" id="need">WHAT YOU NEED</h3>
+<div class="card">
+  <h2>Home Assistant</h2>
+  <p>Free, open source, and it runs at home. The easiest start is a <b>Home Assistant Green</b> box with it already installed. An old laptop, a mini PC or a Raspberry Pi works too. Mine runs in a virtual machine on my home server, next to Avan.</p>
+</div>
+<div class="card">
+  <h2>The devices you already have</h2>
+  <p>Most things with an app already have an integration: lights, speakers, TVs, plugs, the car, the energy meter. You don't need to buy new devices to start.</p>
+</div>
+<div class="card">
+  <h2>An AI assistant (or Assist to start)</h2>
+  <p>My assistant, Avan, talks to Home Assistant from the home server: <a href="../avan/" style="color:var(--pink-soft)">part 1 shows how to build it</a>. No assistant yet? Home Assistant's own <b>Assist</b> is a good start, with a phone or a voice speaker.</p>
+</div>
+<div class="card">
+  <h2>An AI coding agent</h2>
+  <p>For the custom parts: the dashboard cards, the assistant's tools and the checks. The master prompt below is where I'd start.</p>
+  <p class="tip"><b>Skill you do need:</b> patience to name every device properly. The assistant is only as good as the names.</p>
+</div>
+
+<h3 class="group" id="cost">WHAT IT COSTS</h3>
+<div class="tablebox">
+<table>
+  <thead><tr><th>Item</th><th>Cost</th></tr></thead>
+  <tbody>
+    <tr><td>Home Assistant<small>The software, free to run yourself</small></td><td class="c">Free</td></tr>
+    <tr><td>Something to run it on<small>Home Assistant Green, or an old PC or mini PC you already have</small></td><td class="c">Free – about £150 once</td></tr>
+    <tr><td>Home Assistant Link<small>Optional: easy remote access and voice from anywhere. Home Assistant works fully without it</small></td><td class="c">About $6.50 a month</td></tr>
+    <tr><td>Integrations and dashboard cards<small>Built in, or free from the community store (HACS)</small></td><td class="c">Free</td></tr>
+    <tr><td>Your AI assistant<small>The AI and voice services it uses. Part 1 has my real monthly costs</small></td><td class="c">See part 1</td></tr>
+    <tr><td>A wall tablet or voice speaker<small>Optional</small></td><td class="c">Varies</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3 class="group" id="how">HOW THE PIECES FIT</h3>
+<div class="card">
+  <div class="flow">
+    <div class="node core"><b>The assistant (Avan)</b><span>Understands what I say, picks the right devices, asks me first when it should, and replies.</span></div>
+    <div class="arrow">↕ one token, kept on the server</div>
+    <div class="node"><b>Home Assistant</b><span>The body: every device, room and sensor, through 80+ integrations.</span></div>
+    <div class="arrow">↕</div>
+    <div class="row3">
+      <div class="node"><b>Devices</b><span>Hue, speakers, TV, plugs, heater, curtains</span></div>
+      <div class="node"><b>Services</b><span>car, energy, the Tube, weather</span></div>
+      <div class="node"><b>Screens</b><span>command centre, wall, TV, phone</span></div>
+    </div>
+  </div>
+  <p>The rule that keeps it safe: <b>only the server holds the Home Assistant token</b>. Phones, the TV and the wall screen ask the server, and the server decides what's allowed.</p>
+</div>
+
+<h3 class="group" id="ints">THE INTEGRATIONS PEOPLE DON'T THINK OF</h3>
+<div class="feat">
+  <div class="f"><b>The car</b><span>Jaguar Land Rover InControl: range, fuel, tyres, doors and locks.</span></div>
+  <div class="f"><b>The smart meter</b><span>Hildebrand Glow (DCC): live electricity use with no extra hardware.</span></div>
+  <div class="f"><b>How green the grid is</b><span>Electricity Maps: the share of low-carbon power right now.</span></div>
+  <div class="f"><b>The Tube</b><span>TfL: line status and the next trains from my station.</span></div>
+  <div class="f"><b>PlayStation</b><span>What's being played, and trophies.</span></div>
+  <div class="f"><b>Ordinary appliances</b><span>A Broadlink IR/RF remote makes the heater, AC and fan smart.</span></div>
+  <div class="f"><b>Presence that sees you sit still</b><span>An mmWave sensor knows I'm at the desk, even when I don't move.</span></div>
+  <div class="f"><b>Lights that follow the TV</b><span>Philips Hue and the Hue Play HDMI Sync Box.</span></div>
+  <div class="f"><b>A jukebox for guests</b><span>Music Assistant Jukebox: guests scan a QR code and queue songs.</span></div>
+  <div class="f"><b>Wake the PC</b><span>Wake on LAN: "Avan, wake my PC."</span></div>
+  <div class="f"><b>A scent diffuser</b><span>On a schedule, with a refill reminder.</span></div>
+  <div class="f"><b>Even a glucose sensor</b><span>LibreView brings in a FreeStyle Libre sensor. Health data stays off shared screens.</span></div>
+</div>
+
+<h3 class="group" id="steps">THE STEPS (BUILD IN THIS ORDER)</h3>
+<p class="gintro">Each step works at home before you start the next.</p>
+
+<div class="step">
+  <div class="n">STEP 1 · INSTALL</div>
+  <h2>Get Home Assistant running</h2>
+  <p>Plug in a Home Assistant Green, or install Home Assistant OS on a spare PC or a virtual machine. Open it in a browser on the same Wi-Fi and create your account.</p>
+</div>
+
+<div class="step">
+  <div class="n">STEP 2 · ADD WHAT IT FINDS</div>
+  <h2>Accept the discovered devices</h2>
+  <p>Home Assistant finds a lot by itself: Hue, Chromecast and Google TV, Samsung TVs, the Sync Box, ESPHome devices. Add those first, then the ones that need a login (the car, the energy meter).</p>
+</div>
+
+<div class="step">
+  <div class="n">STEP 3 · ROOMS AND NAMES</div>
+  <h2>Name everything like you'd say it</h2>
+  <p>Put every device in an area (room) and give it a plain name. "Living room lamp" works when you talk; "light.hue_go_2" doesn't. Group lights per room so "the kitchen" means all of them.</p>
+</div>
+
+<div class="step">
+  <div class="n">STEP 4 · WHO'S HOME</div>
+  <h2>Phones as presence</h2>
+  <p>Install the Home Assistant app on each phone and turn on location and the Wi-Fi connection sensor. The moment a phone joins the home Wi-Fi, that person counts as home.</p>
+</div>
+
+<div class="step">
+  <div class="n">STEP 5 · ONE SCREEN</div>
+  <h2>A dashboard worth looking at</h2>
+  <p>A tablet on the wall in kiosk mode, with community cards from HACS (Bubble Card, Mushroom, button-card). Colour by condition: amber when it's warm, red when something needs you.</p>
+</div>
+
+<div class="step">
+  <div class="n">STEP 6 · CONNECT THE ASSISTANT</div>
+  <h2>Give your AI the keys, carefully</h2>
+  <p>Create a long-lived token in Home Assistant for the server that runs your assistant, and nothing else. Give the assistant tools to list devices, read states and call services.</p>
+</div>
+
+<div class="step">
+  <div class="n">STEP 7 · CHECK BEFORE "DONE"</div>
+  <h2>No made-up devices</h2>
+  <p>My assistant once switched a light that doesn't exist and said "done". Now every name is checked against Home Assistant first: unknown names are refused with the nearest real ones, and "all the lights" means every light it finds, checked one by one.</p>
+</div>
+
+<div class="step">
+  <div class="n">STEP 8 · ASK FIRST</div>
+  <h2>What it may do on its own</h2>
+  <p>Lights and media straight away. Curtains, heating, locks, the alarm and scenes after my yes, on my phone. Decide your own list before you connect it.</p>
+</div>
+
+<div class="step">
+  <div class="n">STEP 9 · VOICE AND SCREENS</div>
+  <h2>Talk to it anywhere</h2>
+  <p>A Home Assistant Voice speaker, the phone, the command centre and the TV all reach the same assistant. Same brain, same rules, wherever you ask.</p>
+</div>
+
+<div class="step">
+  <div class="n">STEP 10 · TEST AT HOME</div>
+  <h2>Try it with the real house</h2>
+  <p>Say each command in each room and watch what changes. Keep a sample-data view for screenshots you share.</p>
+</div>
+
+<h3 class="group" id="rules">MY SAFETY RULES</h3>
+<div class="card">
+  <p><b>1. One token, on the server.</b> Never on a phone, TV, tablet or in a chat.</p>
+  <p><b>2. Check before acting.</b> No "done" for a device it couldn't find.</p>
+  <p><b>3. Ask first for locks, the alarm, heating and anything paid.</b></p>
+  <p><b>4. Private stays private.</b> Health, money, email and the address never go on shared screens.</p>
+  <p><b>5. Guests get guest things.</b> The server decides, not the screen.</p>
+  <p><b>6. Sample data for screenshots.</b> Hide anything real before you post.</p>
+</div>
+
+<h3 class="group" id="master">THE MASTER PROMPT</h3>
+<p class="gintro">One prompt to start. Paste it into your AI coding agent: it asks about your Home Assistant, devices, rooms, people, assistant and rules first, then plans and sets it up step by step.</p>
+<div class="card prompt">
+<pre id="pm"><code>You are going to help me give my home one AI assistant that controls it through Home Assistant, like the &quot;Avan&quot; setup in this guide: https://dilgrover.github.io/avan-home/
+
+Before you change anything, interview me. Ask the questions below a few at a time, wait for my answers, and skip anything I say I don&#x27;t have. Then write a short plan (what you&#x27;ll set up, in what order, what you need from me) and wait for my OK.
+
+1. Home Assistant
+   - Do I already run Home Assistant? On what (Home Assistant Green, a mini PC, a Raspberry Pi, a virtual machine)? Which version?
+   - If not: help me pick the simplest option for my home and walk me through installing it.
+   - Remote access: the Home Assistant Link subscription, my own domain, or home only?
+
+2. My devices
+   - List what I have, room by room: lights (Philips Hue or other), speakers, TVs and streaming boxes, a Hue Sync Box, plugs, heaters, AC, fans, curtains, sensors, a doorbell or cameras.
+   - Which apps do I use today to control them? Each one is probably an integration.
+   - Ask about the ones people forget: the car&#x27;s app, the energy or smart meter, the games console, the broadband router, public transport, a fitness watch, food delivery.
+
+3. Rooms and names
+   - What are my rooms? Help me put every device in an area and give it a plain name (&quot;Living room lamp&quot;, not &quot;light.hue_go_2&quot;). The assistant will use these names.
+
+4. People and presence
+   - Who lives here? Do we have the Home Assistant app on our phones, with location and the Wi-Fi sensor on, so the house knows who&#x27;s home?
+
+5. The assistant
+   - Do I already have my own AI assistant (part 1 of this series), or should Home Assistant&#x27;s own Assist be the voice for now?
+   - Where does it run, and can it reach Home Assistant over the network?
+
+6. What the assistant may do
+   - Free to do: lights, media, scenes? What must always ask me first (locks, the alarm, heating, curtains, anything that costs money)? What must it never do?
+   - What is private and must never be shown or said aloud on shared screens (health, money, my address, the Wi-Fi password)?
+
+7. Screens and voice
+   - Do I want a wall or desk dashboard (a tablet in kiosk mode)? A voice speaker in a room?
+
+Rules while you build:
+- The Home Assistant long-lived token lives only on the server that runs the assistant, never on a phone, TV, tablet or in a chat.
+- Before every action, check the entity really exists. If it doesn&#x27;t, say so and suggest the nearest real ones. Never report &quot;done&quot; for something you couldn&#x27;t check.
+- Locks, the alarm, heating and anything paid need my yes every time.
+- One room or integration at a time: set it up, test it with me, then move on.
+- Keep a short list of what you changed, so I can undo it.</code></pre>
+<button class="copy" type="button" data-for="pm">Copy prompt</button>
+</div>
+
+<h3 class="group">THE SERIES</h3>
+<div class="next">
+  <div class="f"><span class="num">1</span><div><b><a href="../avan/" style="color:inherit">Avan, my own Jarvis</a></b><span>The assistant behind it all.</span></div></div>
+  <div class="f"><span class="num">2</span><div><b><a href="../avan-tv/" style="color:inherit">The TV</a></b><span>My own TV home screen, run by Avan.</span></div></div>
+  <div class="f"><span class="num">3</span><div><b>Home Assistant</b><span>This guide.</span></div></div>
+  <div class="f"><span class="num">4</span><div><b>The AI office</b><span>A team of AI agents, one per project, working while I sleep.</span></div></div>
+</div>
+
+<p class="foot">Follow <a href="https://www.instagram.com/dilgrover/">@dilgrover</a> for the next part. Questions? Comment on the reel.<br>Built and tested in my own home. Yours will differ: test each step, and keep your token safe. Home Assistant is a trademark of the Open Home Foundation; product names belong to their owners. This is a personal project, not affiliated with any of them.</p>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',async function(){
+    const t=document.getElementById(b.dataset.for).innerText;
+    try{await navigator.clipboard.writeText(t);b.textContent='Copied ✓'}catch(e){b.textContent='Select and copy above'}
+    setTimeout(function(){b.textContent='Copy prompt'},2200);
+  });
+});
+</script>
+</body>
+</html>
